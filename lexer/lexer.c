@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/10 17:33:16 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/12 14:25:33 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,31 @@ static	int	checkcharacter(t_array *array, char *str, int i, int type)
 	else if (str[i] == '\"')
 		check = checkquotes(str, i, '\"');
 	else if (str[i] == '|')
-		check = checksymbol(str, i, '|');
+		check = checkpipe(str, i);
 	else if (str[i] == '>')
-		check = checksymbol(str, i, '>');
+		check = checkredir(str, i, '>');
 	else if (str[i] == '<')
-		check = checksymbol(str, i, '<');
+		check = checkredir(str, i, '<');
 	else
 		check = checkcommand(str, i);
 	if (str[i] != '\n' && type == 1)
 		array->size++;
 	return (check);
+}
+
+static	int	checkfirstpipe(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '|')
+	{
+		printf("Syntax Error\n");
+		return (-1);
+	}
+	return (i);
 }
 
 static	int	get_token(t_array *array, char *str, int type)
@@ -42,8 +57,10 @@ static	int	get_token(t_array *array, char *str, int type)
 	int	check;
 	int	status;
 
-	i = 0;
 	status = 1;
+	i = checkfirstpipe(str);
+	if (i < 0)
+		return (i);
 	while (str[i])
 	{
 		while (str[i] == ' ')
@@ -60,11 +77,6 @@ static	int	get_token(t_array *array, char *str, int type)
 	return (status);
 }
 
-static	void	combine_array(t_array *array)
-{
-	(void)array;
-}
-
 void	lexer(t_array *array, char *str)
 {
 	int		i;
@@ -77,19 +89,19 @@ void	lexer(t_array *array, char *str)
 	array->size = 0;
 	if (get_token(array, str, 1) < 0)
 		return ;
-	array->storage = malloc(sizeof(char *) * array->size + 1);
+	array->token = malloc(sizeof(char *) * array->size + 1);
 	while (i < array->size)
 	{
 		while (str[j] == ' ')
 			j++;
 		k = 0;
 		len = checkcharacter(array, str, j, 2);
-		array->storage[i] = malloc(sizeof(char) * len + 1);
+		array->token[i] = malloc(sizeof(char) * len + 1);
 		while (k < len)
-			array->storage[i][k++] = str[j++];
-		array->storage[i][k] = '\0';
+			array->token[i][k++] = str[j++];
+		array->token[i][k] = '\0';
 		i++;
 	}
-	array->storage[i] = 0;
-	combine_array(array);
+	array->token[i] = 0;
+	print_array(array->token);
 }

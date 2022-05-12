@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   array_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 11:45:31 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/12 15:28:33 by jhii             ###   ########.fr       */
+/*   Created: 2022/05/12 11:07:24 by jhii              #+#    #+#             */
+/*   Updated: 2022/05/12 14:21:13 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(void)
+void	free_array(char **tab)
 {
-	minishell();
-	return (0);
+	unsigned int	i;
+
+	i = 0;
+	if (tab == NULL)
+		return ;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
+}
+
+void	print_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		printf("%s\n", array[i++]);
 }

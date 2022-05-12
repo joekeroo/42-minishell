@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/10 15:39:36 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/12 14:34:16 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,22 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "libft/libft.h"
 
 typedef struct s_array
 {
-	char	**storage;
+	char	*line;
+	char	**token;
 	int		size;
 }	t_array;
+
+typedef struct s_list
+{
+	t_array			*content;
+	struct s_list	*next;
+}	t_list;
 
 // minishell functions
 void	minishell(void);
@@ -39,10 +48,13 @@ void	minishell(void);
 // lexer functions
 int		checkcommand(char *str, int i);
 int		checkquotes(char *str, int i, char type);
-int		checksymbol(char *str, int i, char type);
+int		checkpipe(char *str, int i);
+int		checkredir(char *str, int i, char type);
 void	lexer(t_array *array, char *str);
 
 // utility functions
 char	*get_next_line(int fd);
+void	free_array(char **tab);
+void	print_array(char **array);
 
 #endif

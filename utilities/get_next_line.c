@@ -6,11 +6,11 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:00:44 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/09 15:01:22 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/12 11:00:50 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static	int	ft_getnl(const char *str)
 {

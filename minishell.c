@@ -6,39 +6,37 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/10 17:12:28 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/12 14:26:43 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	printarray(char **array)
+static	int	exit_minishell(t_array *array, char *input)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
-		printf("%s\n", array[i++]);
+	(void)array;
+	if (ft_strncmp(input, "exit", 4) == 0)
+	{
+		printf("exit\n");
+		free(input);
+		return (1);
+	}
+	return (0);
 }
 
 void	minishell(void)
 {
-	char	*temp;
 	t_array	array;
 
 	while (1)
 	{
-		ft_putstr_fd("minishell % ", 1);
-		temp = get_next_line(0);
-		if (ft_strncmp(temp, "exit\n", 5) == 0)
-		{
-			printf("exit\n");
-			free(temp);
-			break ;
-		}
-		lexer(&array, temp);
-		printarray(array.storage);
-		free(temp);
+		array.line = readline("minishell % ");
+		if (exit_minishell(&array, array.line) > 0)
+			return ;
+		add_history(array.line);
+		lexer(&array, array.line);
+		free_array(array.token);
+		free(array.line);
 	}
 	return ;
 }
