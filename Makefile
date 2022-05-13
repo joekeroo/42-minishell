@@ -7,7 +7,7 @@ RM = rm -f
 
 MAIN = main.c
 SRC = minishell.c \
-	  utilities/get_next_line.c utilities/array_utils.c \
+	  utilities/array_utils.c \
 	  lexer/lexer.c lexer/lexer_utils.c
 OBJ = ${SRC:.c=.o}
 

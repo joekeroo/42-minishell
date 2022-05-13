@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/12 14:34:16 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/13 15:59:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int		checkredir(char *str, int i, char type);
 void	lexer(t_array *array, char *str);
 
 // utility functions
-char	*get_next_line(int fd);
 void	free_array(char **tab);
 void	print_array(char **array);
 
