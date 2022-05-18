@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhii <jhii@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 05:54:24 by jhii              #+#    #+#             */
-/*   Updated: 2021/07/22 01:58:11 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/18 15:53:04 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_itoa(int n)
 	i = ft_countdigit(nbr);
 	negative = 0;
 	res = malloc(ft_countdigit(nbr) + 1);
-	if (res == NULL)
+	if (!res)
 		return (NULL);
 	res[i--] = '\0';
 	if (nbr == 0)

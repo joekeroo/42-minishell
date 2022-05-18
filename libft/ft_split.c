@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhii <jhii@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 05:53:13 by jhii              #+#    #+#             */
-/*   Updated: 2021/07/22 01:57:35 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/18 15:54:59 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static int	ft_countstr(const char *s, char c)
 {
-	int	count;
 	int	i;
+	int	count;
 
-	count = 0;
 	i = 0;
+	count = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == c)
@@ -55,7 +55,7 @@ char	**ft_split(const char *s, char c)
 	i = 0;
 	j = 0;
 	str = malloc(sizeof(char *) * (ft_countstr(s, c) + 1));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	while (s[i] != '\0')
 	{

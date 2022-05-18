@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jhii <jhii@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 01:56:15 by jhii              #+#    #+#             */
-/*   Updated: 2021/07/21 04:37:50 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/18 15:57:29 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strlen(const char *str)
 	int	count;
 
 	count = 0;
-	while (str[count] != '\0')
+	while (str[count])
 		count++;
 	return (count);
 }
