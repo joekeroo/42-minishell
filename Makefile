@@ -6,13 +6,18 @@ LDFLAGS = -L/usr/include -lreadline
 RM = rm -f
 
 MAIN = main.c
-SRC = minishell.c \
-	  utilities/array_utils.c \
-	  lexer/lexer.c lexer/lexer_utils.c \
-	  linkedlist/ft_lstadd_front.c linkedlist/ft_lstadd_back.c linkedlist/ft_lstclear.c \
+
+SRC = minishell.c
+
+UTILS = utilities/array_utils.c
+
+LEXER = lexer/lexer.c lexer/lexer_utils.c
+
+LIST = linkedlist/ft_lstadd_front.c linkedlist/ft_lstadd_back.c linkedlist/ft_lstclear.c \
 	  linkedlist/ft_lstdelone.c linkedlist/ft_lstiter.c linkedlist/ft_lstlast.c \
 	  linkedlist/ft_lstmap.c linkedlist/ft_lstnew.c linkedlist/ft_lstsize.c
-OBJ = ${SRC:.c=.o}
+
+OBJ = ${SRC:.c=.o} ${UTILS:.c=.o} ${LEXER:.c=.o} ${LIST:.c=.o}
 
 LIBFT_PATH = libft/
 LIBFT = libft/libft.a

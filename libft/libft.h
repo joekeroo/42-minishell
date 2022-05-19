@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:09:39 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/19 15:31:24 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/19 15:46:34 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "../minishell.h"
 
 int		ft_tolower(int c);
 int		ft_toupper(int c);
