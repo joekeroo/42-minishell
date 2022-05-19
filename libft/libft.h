@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 23:09:39 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/18 16:13:35 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/19 12:34:50 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(const char *s, unsigned int start, int len);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
-char	*ft_strnstr(const char *haystack, const char *needle, unsigned long len);
+char	*ft_strnstr(const char *haystack, const char *needle, unsigned long l);
 void	ft_bzero(void *s, unsigned long n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
