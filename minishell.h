@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/13 15:59:46 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/19 15:07:07 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ typedef struct s_array
 	char	**token;
 	int		size;
 }	t_array;
-
-typedef struct s_list
-{
-	t_array			*content;
-	struct s_list	*next;
-}	t_list;
 
 // minishell functions
 void	minishell(void);
