@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:14:51 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/19 13:19:01 by jhii             ###   ########.fr       */
+/*   Created: 2022/05/19 12:57:28 by jhii              #+#    #+#             */
+/*   Updated: 2022/05/19 15:28:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstadd_front(t_list **lst, t_list *newl)
 {
-	t_list	*tmp;
-
-	if (!del || !lst || !*lst)
-		return ;
-	while (lst && *lst)
+	if (lst)
 	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
+		if (*lst)
+			newl->next = *lst;
+		*lst = newl;
 	}
 }

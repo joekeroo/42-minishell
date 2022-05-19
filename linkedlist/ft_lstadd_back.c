@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:14:53 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/19 13:17:50 by jhii             ###   ########.fr       */
+/*   Created: 2022/05/19 13:07:00 by jhii              #+#    #+#             */
+/*   Updated: 2022/05/19 15:28:39 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void*))
+void	ft_lstadd_back(t_list **lst, t_list *newl)
 {
-	if (!f)
-		return ;
-	while (lst)
+	t_list	*last;
+
+	if (lst)
 	{
-		(*f)(lst->content);
-		lst = lst->next;
+		if (*lst)
+		{
+			last = ft_lstlast(*lst);
+			last->next = newl;
+		}
+		else
+			*lst = newl;
 	}
 }

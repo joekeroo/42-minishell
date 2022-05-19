@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:11:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/19 13:12:14 by jhii             ###   ########.fr       */
+/*   Created: 2022/05/19 13:14:55 by jhii              #+#    #+#             */
+/*   Updated: 2022/05/19 15:28:47 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-int	ft_lstsize(t_list *lst)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *))
 {
-	int	i;
+	t_list	*first;
+	t_list	*new;
 
-	i = 0;
+	if (!f || !del)
+		return (NULL);
+	first = NULL;
+	new = ft_lstnew((*f)(lst->content));
 	while (lst)
 	{
+		if (!new)
+		{
+			while (first)
+			{
+				new = first->next;
+				(*del)(first->content);
+				free(first);
+				first = new;
+			}
+			lst = NULL;
+			return (NULL);
+		}
+		ft_lstadd_back(&first, new);
 		lst = lst->next;
-		i++;
 	}
-	return (i);
+	return (first);
 }
