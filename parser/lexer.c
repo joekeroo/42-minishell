@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/12 14:25:33 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/23 14:41:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,13 @@ static	int	get_token(t_array *array, char *str, int type)
 	return (status);
 }
 
-void	lexer(t_array *array, char *str)
+static	void	init_lexer(t_array *array)
+{
+	array->size = 0;
+	array->token = NULL;
+}
+
+int	lexer(t_array *array)
 {
 	int		i;
 	int		j;
@@ -86,22 +92,22 @@ void	lexer(t_array *array, char *str)
 
 	i = 0;
 	j = 0;
-	array->size = 0;
-	if (get_token(array, str, 1) < 0)
-		return ;
+	init_lexer(array);
+	if (get_token(array, array->line, 1) < 0)
+		return (-1);
 	array->token = malloc(sizeof(char *) * array->size + 1);
 	while (i < array->size)
 	{
-		while (str[j] == ' ')
+		while (array->line[j] == ' ')
 			j++;
 		k = 0;
-		len = checkcharacter(array, str, j, 2);
+		len = checkcharacter(array, array->line, j, 2);
 		array->token[i] = malloc(sizeof(char) * len + 1);
 		while (k < len)
-			array->token[i][k++] = str[j++];
+			array->token[i][k++] = array->line[j++];
 		array->token[i][k] = '\0';
 		i++;
 	}
 	array->token[i] = 0;
-	print_array(array->token);
+	return (1);
 }

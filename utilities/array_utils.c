@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:07:24 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/12 14:21:13 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/23 11:58:33 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_array(char **tab)
 	unsigned int	i;
 
 	i = 0;
-	if (tab == NULL)
+	if (!tab)
 		return ;
 	while (tab[i])
 		free(tab[i++]);

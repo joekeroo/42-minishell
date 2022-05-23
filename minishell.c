@@ -6,15 +6,14 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/12 14:26:43 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/23 14:42:55 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int	exit_minishell(t_array *array, char *input)
+static	int	exit_minishell(char *input)
 {
-	(void)array;
 	if (ft_strncmp(input, "exit", 4) == 0)
 	{
 		printf("exit\n");
@@ -31,10 +30,14 @@ void	minishell(void)
 	while (1)
 	{
 		array.line = readline("minishell % ");
-		if (exit_minishell(&array, array.line) > 0)
-			return ;
+		if (exit_minishell(array.line) > 0)
+			break ;
 		add_history(array.line);
-		lexer(&array, array.line);
+		if (lexer(&array) > 0)
+		{
+			parser(&array);
+			print_array(array.token);
+		}
 		free_array(array.token);
 		free(array.line);
 	}
