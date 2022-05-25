@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/23 15:19:33 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/25 12:01:32 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ typedef struct s_array
 void	minishell(void);
 
 // lexer functions
-int	lexer(t_array *array);
-int	checkpipe(char *str, int i);
-int	checkcommand(char *str, int i);
-int	checkredir(char *str, int i, char type);
-int	checkquotes(char *str, int i, char type);
+int		lexer(t_array *array);
+int		checkpipe(char *str, int i);
+int		checkcommand(char *str, int i);
+int		checkredir(char *str, int i, char type);
+int		checkquotes(char *str, int i, char type);
 
 // parser functions
 void	parser(t_array *array);

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:36:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/12 14:04:20 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/25 12:12:11 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ int	checkredir(char *str, int i, char type)
 	return (count);
 }
 
+int	checkcommand(char *str, int i)
+{
+	int	len;
+
+	len = 0;
+	while (str[i] == ' ')
+		i++;
+	while (str[i])
+	{
+		if (str[i] != '\'' && str[i] != '\"' && str[i] != '|'
+			&& str[i] != '>' && str[i] != '<' && str[i] != ' '
+			&& str[i] != '\n')
+			len++;
+		else
+			break ;
+		i++;
+	}
+	return (len);
+}
+
 // str = string, i = index, type = quotes symbol
 int	checkquotes(char *str, int i, char type)
 {
@@ -82,25 +102,5 @@ int	checkquotes(char *str, int i, char type)
 	}
 	if (closed_quotes == 0)
 		len = -1;
-	return (len);
-}
-
-int	checkcommand(char *str, int i)
-{
-	int	len;
-
-	len = 0;
-	while (str[i] == ' ')
-		i++;
-	while (str[i])
-	{
-		if (str[i] != '\'' && str[i] != '\"' && str[i] != '|'
-			&& str[i] != '>' && str[i] != '<' && str[i] != ' '
-			&& str[i] != '\n')
-			len++;
-		else
-			break ;
-		i++;
-	}
 	return (len);
 }

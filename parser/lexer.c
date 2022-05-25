@@ -6,11 +6,18 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/23 14:41:46 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/25 12:03:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	checkspaces(char *str, int i)
+{
+	while (str[i] == ' ')
+		i++;
+	return (i);
+}
 
 static	int	checkcharacter(t_array *array, char *str, int i, int type)
 {
@@ -31,7 +38,7 @@ static	int	checkcharacter(t_array *array, char *str, int i, int type)
 		check = checkredir(str, i, '<');
 	else
 		check = checkcommand(str, i);
-	if (str[i] != '\n' && type == 1)
+	if (str[i] != ' ' && str[i] != '\0' && type == 1)
 		array->size++;
 	return (check);
 }
@@ -63,8 +70,7 @@ static	int	get_token(t_array *array, char *str, int type)
 		return (i);
 	while (str[i])
 	{
-		while (str[i] == ' ')
-			i++;
+		i = checkspaces(str, i);
 		check = checkcharacter(array, str, i, type);
 		if (check < 0)
 		{
@@ -77,12 +83,6 @@ static	int	get_token(t_array *array, char *str, int type)
 	return (status);
 }
 
-static	void	init_lexer(t_array *array)
-{
-	array->size = 0;
-	array->token = NULL;
-}
-
 int	lexer(t_array *array)
 {
 	int		i;
@@ -92,21 +92,21 @@ int	lexer(t_array *array)
 
 	i = 0;
 	j = 0;
-	init_lexer(array);
+	array->size = 0;
+	array->token = NULL;
 	if (get_token(array, array->line, 1) < 0)
 		return (-1);
+	printf("size: %d\n", array->size);
 	array->token = malloc(sizeof(char *) * array->size + 1);
 	while (i < array->size)
 	{
-		while (array->line[j] == ' ')
-			j++;
 		k = 0;
+		j = checkspaces(array->line, j);
 		len = checkcharacter(array, array->line, j, 2);
 		array->token[i] = malloc(sizeof(char) * len + 1);
 		while (k < len)
 			array->token[i][k++] = array->line[j++];
-		array->token[i][k] = '\0';
-		i++;
+		array->token[i++][k] = '\0';
 	}
 	array->token[i] = 0;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/23 14:42:55 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/24 16:16:37 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	minishell(void)
 		add_history(array.line);
 		if (lexer(&array) > 0)
 		{
-			parser(&array);
+			// parser(&array);
 			print_array(array.token);
 		}
 		free_array(array.token);
