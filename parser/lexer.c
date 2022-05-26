@@ -6,38 +6,35 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/25 12:03:42 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/26 14:42:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	checkspaces(char *str, int i)
-{
-	while (str[i] == ' ')
-		i++;
-	return (i);
-}
 
 static	int	checkcharacter(t_array *array, char *str, int i, int type)
 {
 	int	check;
 
 	check = 0;
-	if (str[i] == '\n')
-		check++;
-	else if (str[i] == '\'')
-		check = checkquotes(str, i, '\'');
-	else if (str[i] == '\"')
-		check = checkquotes(str, i, '\"');
-	else if (str[i] == '|')
+	if (str[i] == '|')
 		check = checkpipe(str, i);
 	else if (str[i] == '>')
 		check = checkredir(str, i, '>');
 	else if (str[i] == '<')
 		check = checkredir(str, i, '<');
 	else
-		check = checkcommand(str, i);
+	{
+		while (str[i + check] != ' ' && str[i + check] != '>'
+			&& str[i + check] != '<' && str[i + check] != '|'
+			&& str[i + check] != '\0')
+		{
+			check = check + checkcommand(str, i + check);
+			check = extraquotes(str, i, check);
+			if (check == -1)
+				return (check);
+		}
+	}
 	if (str[i] != ' ' && str[i] != '\0' && type == 1)
 		array->size++;
 	return (check);
@@ -70,7 +67,8 @@ static	int	get_token(t_array *array, char *str, int type)
 		return (i);
 	while (str[i])
 	{
-		i = checkspaces(str, i);
+		while (str[i] == ' ')
+			i++;
 		check = checkcharacter(array, str, i, type);
 		if (check < 0)
 		{
@@ -96,12 +94,12 @@ int	lexer(t_array *array)
 	array->token = NULL;
 	if (get_token(array, array->line, 1) < 0)
 		return (-1);
-	printf("size: %d\n", array->size);
 	array->token = malloc(sizeof(char *) * array->size + 1);
 	while (i < array->size)
 	{
 		k = 0;
-		j = checkspaces(array->line, j);
+		while (array->line[j] == ' ')
+			j++;
 		len = checkcharacter(array, array->line, j, 2);
 		array->token[i] = malloc(sizeof(char) * len + 1);
 		while (k < len)
