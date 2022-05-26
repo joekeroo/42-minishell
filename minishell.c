@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/26 14:36:37 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/26 17:52:53 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static	int	exit_minishell(char *input)
 
 void	minishell(void)
 {
+	int		i;
 	t_array	array;
 
 	while (1)
@@ -34,7 +35,13 @@ void	minishell(void)
 			break ;
 		add_history(array.line);
 		if (lexer(&array) > 0)
+		{
 			parser(&array);
+			i = 0;
+			while (i < array.n_cmdln)
+				free_array(array.cmd_group[i++].cmd);
+			free(array.cmd_group);
+		}
 		free_array(array.token);
 		free(array.line);
 	}

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/25 16:01:49 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/26 17:35:24 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@
 
 typedef struct s_group
 {
-	char	*cmd;
-	char	*args;
+	int		size;
+	char	**cmd;
 }	t_group;
 
 typedef struct s_array
 {
 	int		size;
-	int		cmdln;
+	int		n_cmdln;
 	char	*line;
 	char	**token;
 	t_group	*cmd_group;
