@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:08:12 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/26 18:02:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/27 14:16:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,5 @@ void	parser(t_array *array)
 			array->cmd_group[i].cmd[k++] = ft_strdup(array->token[j++]);
 		array->cmd_group[i++].cmd[k] = 0;
 	}
-	// i = 0;
-	// while (i < array->n_cmdln)
-	// {
-	// 	j = 0;
-	// 	printf("[");
-	// 	while (array->cmd_group[i].cmd[j])
-	// 		printf("%s, ", array->cmd_group[i].cmd[j++]);
-	// 	printf("]\n");
-	// 	i++;
-	// }
+	print_cmdln(array);
 }

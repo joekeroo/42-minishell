@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/26 17:35:24 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/27 14:51:25 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ int		checkquotes(char *str, int i, char type);
 void	parser(t_array *array);
 
 // utility functions
-void	free_array(char **tab);
+void	free_array(char **array);
+void	free_cmdgrp(t_array *array);
 void	print_array(char **array);
+void	print_cmdln(t_array *array);
 
 // builtin functions
 void	echo(void);
