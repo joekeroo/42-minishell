@@ -11,9 +11,10 @@ SRC = minishell.c
 
 BLTIN = builtin/echo.c
 
-UTILS = utilities/array_utils.c
+UTILS = utilities/print_utils.c utilities/free_utils.c
 
-PARSER = parser/parser.c parser/lexer.c parser/lexer_utils.c parser/parser_utils.c
+PARSER = parser/parser.c parser/lexer.c parser/lexer_utils.c parser/init_cmdgrp.c \
+		 parser/redirection.c
 
 OBJ = ${SRC:.c=.o} ${BLTIN:.c=.o} ${UTILS:.c=.o} ${PARSER:.c=.o}
 

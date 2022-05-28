@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/28 17:30:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/28 20:28:25 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
+typedef struct s_redir
+{
+	int		size;
+	int		*types;
+	char	**files;
+	char	*infile;
+	char	*outfile;
+}	t_redir;
+
 typedef struct s_group
 {
 	int		size;
-	int		inredir;
-	int		outredir;
 	char	**cmd;
-	char	*infile;
-	char	*outfile;
+	t_redir	redir;
 }	t_group;
 
 typedef struct s_array
@@ -67,12 +73,14 @@ int		checkquotes(char *str, int i, char type);
 // parser functions
 void	parser(t_array *array);
 void	init_cmdgrp(t_array *array);
+void	check_files(t_array *array);
 
 // utility functions
 void	free_array(char **array);
 void	free_cmdgrp(t_array *array);
 void	print_array(char **array);
 void	print_cmdln(t_array *array);
+void	print_redir(t_array *array, int i);
 
 // builtin functions
 void	echo(void);
