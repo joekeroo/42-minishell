@@ -13,7 +13,7 @@ BLTIN = builtin/echo.c
 
 UTILS = utilities/array_utils.c
 
-PARSER = parser/parser.c parser/lexer.c parser/lexer_utils.c
+PARSER = parser/parser.c parser/lexer.c parser/lexer_utils.c parser/parser_utils.c
 
 OBJ = ${SRC:.c=.o} ${BLTIN:.c=.o} ${UTILS:.c=.o} ${PARSER:.c=.o}
 

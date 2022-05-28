@@ -6,71 +6,61 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:08:12 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/27 14:16:08 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/28 17:32:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	init_array(t_array *array)
+static	void	is_redir(t_array *array, int i)
+{
+	int	j;
+
+	j = 0;
+	while (array->cmd_group[i].cmd[j])
+	{
+		if (array->cmd_group[i].cmd[j][0] == '<')
+		{
+			if (array->cmd_group[i].cmd[j][1] == '<')
+			array->cmd_group[i].outredir = INFILE;
+			if (array->cmd_group[i].infile)
+				free(array->cmd_group[i].infile);
+			array->cmd_group[i].infile
+				= ft_strdup(array->cmd_group[i].cmd[j + 1]);
+		}
+		if (array->cmd_group[i].cmd[j][0] == '>')
+		{
+			array->cmd_group[i].outredir = TRUNC;
+			if (array->cmd_group[i].cmd[j][1] == '>')
+				array->cmd_group[i].outredir = APPEND;
+			if (array->cmd_group[i].outfile)
+				free(array->cmd_group[i].outfile);
+			array->cmd_group[i].outfile
+				= ft_strdup(array->cmd_group[i].cmd[j + 1]);
+		}
+		j++;
+	}
+}
+
+static	void	check_files(t_array *array)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < array->n_cmdln)
 	{
-		array->cmd_group[i].size = 0;
-		while (array->token[j])
-		{
-			if (array->token[j][0] != '|')
-				array->cmd_group[i].size++;
-			else
-				break ;
-			j++;
-		}
-		j++;
-		array->cmd_group[i].cmd = malloc(sizeof(char *)
-				* array->cmd_group[i].size + 1);
+		j = 0;
+		array->cmd_group[i].infile = NULL;
+		array->cmd_group[i].outfile = NULL;
+		is_redir(array, i);
 		i++;
 	}
-}
-
-static	void	init_parser(t_array *array)
-{
-	int	i;
-
-	i = 0;
-	array->n_cmdln = 0;
-	while (array->token[i])
-	{
-		if (array->token[i][0] == '|')
-			array->n_cmdln++;
-		i++;
-	}
-	array->n_cmdln++;
-	array->cmd_group = malloc(sizeof(t_group) * array->n_cmdln);
-	init_array(array);
 }
 
 void	parser(t_array *array)
 {
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	init_parser(array);
-	while (i < array->n_cmdln)
-	{
-		k = 0;
-		if (array->token[j][0] == '|')
-			j++;
-		while (k < array->cmd_group[i].size)
-			array->cmd_group[i].cmd[k++] = ft_strdup(array->token[j++]);
-		array->cmd_group[i++].cmd[k] = 0;
-	}
+	init_cmdgrp(array);
+	check_files(array);
 	print_cmdln(array);
 }

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/27 14:51:25 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/28 17:30:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define CYN	"\x1B[36m"
 # define WHT	"\x1B[37m"
 
+# define HEREDOC	1
+# define INFILE		2
+# define TRUNC		3
+# define APPEND		4
+
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -32,7 +37,11 @@
 typedef struct s_group
 {
 	int		size;
+	int		inredir;
+	int		outredir;
 	char	**cmd;
+	char	*infile;
+	char	*outfile;
 }	t_group;
 
 typedef struct s_array
@@ -57,6 +66,7 @@ int		checkquotes(char *str, int i, char type);
 
 // parser functions
 void	parser(t_array *array);
+void	init_cmdgrp(t_array *array);
 
 // utility functions
 void	free_array(char **array);
