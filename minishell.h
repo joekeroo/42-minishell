@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/28 20:28:25 by jhii             ###   ########.fr       */
+/*   Updated: 2022/05/31 17:01:14 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@
 # define CYN	"\x1B[36m"
 # define WHT	"\x1B[37m"
 
-# define HEREDOC	1
-# define INFILE		2
-# define TRUNC		3
-# define APPEND		4
-
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -33,6 +28,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+
+enum {
+	HEREDOC = 1,
+	INFILE = 2,
+	TRUNC = 3,
+	APPEND = 4
+};
 
 typedef struct s_redir
 {
