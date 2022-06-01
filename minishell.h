@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/31 17:01:14 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 15:15:11 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct s_redir
 typedef struct s_group
 {
 	int		size;
-	char	**cmd;
+	char	*cmd;
+	char	**token;
 	t_redir	redir;
 }	t_group;
 
@@ -76,6 +77,7 @@ int		checkquotes(char *str, int i, char type);
 void	parser(t_array *array);
 void	init_cmdgrp(t_array *array);
 void	check_files(t_array *array);
+void	check_cmd(t_array *array);
 
 // utility functions
 void	free_array(char **array);

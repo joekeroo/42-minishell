@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:34:36 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/28 19:44:52 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 15:12:04 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	void	init_array(t_array *array)
 			j++;
 		}
 		j++;
-		array->cmd_group[i].cmd = malloc(sizeof(char *)
+		array->cmd_group[i].token = malloc(sizeof(char *)
 				* array->cmd_group[i].size + 1);
 		i++;
 	}
@@ -61,7 +61,7 @@ void	init_cmdgrp(t_array *array)
 		if (array->token[j][0] == '|')
 			j++;
 		while (k < array->cmd_group[i].size)
-			array->cmd_group[i].cmd[k++] = ft_strdup(array->token[j++]);
-		array->cmd_group[i++].cmd[k] = 0;
+			array->cmd_group[i].token[k++] = ft_strdup(array->token[j++]);
+		array->cmd_group[i++].token[k] = 0;
 	}
 }
