@@ -6,20 +6,20 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:07:24 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 15:15:40 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 16:27:50 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_array(char **array)
+void	free_array(char **array, int size)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (!array)
 		return ;
-	while (array[i])
+	while (i < size)
 		free(array[i++]);
 	free(array);
 }
@@ -38,10 +38,12 @@ void	free_cmdgrp(t_array *array)
 		if (array->cmd_group[i].redir.types)
 			free(array->cmd_group[i].redir.types);
 		if (array->cmd_group[i].redir.files)
-			free_array(array->cmd_group[i].redir.files);
-		// if (array->cmd_group[i].cmd)
-		// 	free(array->cmd_group[i].cmd);
-		free_array(array->cmd_group[i++].token);
+			free_array(array->cmd_group[i].redir.files,
+				array->cmd_group[i].redir.size);
+		if (array->cmd_group[i].cmd)
+			free(array->cmd_group[i].cmd);
+		free_array(array->cmd_group[i].token, array->cmd_group[i].size);
+		i++;
 	}
 	free(array->cmd_group);
 }

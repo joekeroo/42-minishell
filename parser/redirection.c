@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:39:27 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 15:12:19 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 16:26:17 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	void	count_redirection(t_array *array, int i)
 
 	j = 0;
 	array->cmd_group[i].redir.size = 0;
-	while (array->cmd_group[i].token[j])
+	while (j < array->cmd_group[i].size)
 	{
 		if (array->cmd_group[i].token[j][0] == '<'
 			|| array->cmd_group[i].token[j][0] == '>')
@@ -52,7 +52,7 @@ static	void	check_infile(t_array *array, int i, int *curr)
 	int	j;
 
 	j = 0;
-	while (array->cmd_group[i].token[j])
+	while (j < array->cmd_group[i].size)
 	{
 		if (array->cmd_group[i].token[j][0] == '<')
 		{
@@ -74,7 +74,7 @@ static	void	check_outfile(t_array *array, int i, int *curr)
 	int	j;
 
 	j = 0;
-	while (array->cmd_group[i].token[j])
+	while (j < array->cmd_group[i].size)
 	{
 		if (array->cmd_group[i].token[j][0] == '>')
 		{
@@ -106,10 +106,9 @@ void	check_files(t_array *array)
 		array->cmd_group[i].redir.types = malloc(sizeof(int)
 				* array->cmd_group[i].redir.size);
 		array->cmd_group[i].redir.files = malloc(sizeof(char *)
-				* array->cmd_group[i].redir.size + 1);
+				* array->cmd_group[i].redir.size);
 		check_infile(array, i, &j);
 		check_outfile(array, i, &j);
-		array->cmd_group[i].redir.files[j] = 0;
 		i++;
 	}
 }

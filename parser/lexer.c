@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/26 14:42:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 16:26:00 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	lexer(t_array *array)
 	array->token = NULL;
 	if (get_token(array, array->line, 1) < 0)
 		return (-1);
-	array->token = malloc(sizeof(char *) * array->size + 1);
+	array->token = malloc(sizeof(char *) * array->size);
 	while (i < array->size)
 	{
 		k = 0;
@@ -106,6 +106,5 @@ int	lexer(t_array *array)
 			array->token[i][k++] = array->line[j++];
 		array->token[i++][k] = '\0';
 	}
-	array->token[i] = 0;
 	return (1);
 }

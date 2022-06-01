@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:09:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 15:22:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 18:09:13 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	int	has_redir(t_array *array, int curr)
 	int	i;
 
 	i = 0;
-	while (array->cmd_group[curr].token[i])
+	while (i < array->cmd_group[curr].size)
 	{
 		if (is_redir(array, curr, i))
 			return (1);
@@ -43,7 +43,7 @@ static	int	get_cmd(t_array *array, int curr)
 	cmd = -1;
 	if (has_redir(array, curr) == 0)
 		return (0);
-	while (array->cmd_group[curr].token[i])
+	while (i < array->cmd_group[curr].size)
 	{
 		if (is_redir(array, curr, i))
 			i++;
@@ -65,7 +65,7 @@ void	check_cmd(t_array *array)
 	int	j;
 
 	i = 0;
-	while (array->cmd_group[i].token)
+	while (i < array->n_cmdln)
 	{
 		j = get_cmd(array, i);
 		array->cmd_group[i].cmd = NULL;

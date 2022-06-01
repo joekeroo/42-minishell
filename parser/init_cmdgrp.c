@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:34:36 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 15:12:04 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 16:26:44 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	void	init_array(t_array *array)
 	while (i < array->n_cmdln)
 	{
 		array->cmd_group[i].size = 0;
-		while (array->token[j])
+		while (j < array->size)
 		{
 			if (array->token[j][0] != '|')
 				array->cmd_group[i].size++;
@@ -32,7 +32,7 @@ static	void	init_array(t_array *array)
 		}
 		j++;
 		array->cmd_group[i].token = malloc(sizeof(char *)
-				* array->cmd_group[i].size + 1);
+				* array->cmd_group[i].size);
 		i++;
 	}
 }
@@ -45,7 +45,7 @@ void	init_cmdgrp(t_array *array)
 
 	i = 0;
 	array->n_cmdln = 0;
-	while (array->token[i])
+	while (i < array->size)
 	{
 		if (array->token[i][0] == '|')
 			array->n_cmdln++;
@@ -58,10 +58,10 @@ void	init_cmdgrp(t_array *array)
 	while (i < array->n_cmdln)
 	{
 		k = 0;
-		if (array->token[j][0] == '|')
+		if (j < array->size && array->token[j][0] == '|')
 			j++;
 		while (k < array->cmd_group[i].size)
 			array->cmd_group[i].token[k++] = ft_strdup(array->token[j++]);
-		array->cmd_group[i++].token[k] = 0;
+		i++;
 	}
 }
