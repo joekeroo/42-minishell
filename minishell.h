@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 16:15:16 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/01 19:48:25 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	parser(t_array *array);
 void	init_cmdgrp(t_array *array);
 void	check_files(t_array *array);
 void	check_cmd(t_array *array);
+void	check_expansion(t_array *array);
 
 // utility functions
 void	free_array(char **array, int size);
