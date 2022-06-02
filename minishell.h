@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 19:48:25 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/02 16:37:55 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,15 @@ int		checkredir(char *str, int i, char type);
 int		extraquotes(char *str, int i, int check);
 int		checkquotes(char *str, int i, char type);
 
+// expansion functions
+int		outsidequotes(char *str);
+void	check_expansion(t_array *array);
+
 // parser functions
 void	parser(t_array *array);
-void	init_cmdgrp(t_array *array);
-void	check_files(t_array *array);
 void	check_cmd(t_array *array);
-void	check_expansion(t_array *array);
+void	check_files(t_array *array);
+void	init_cmdgrp(t_array *array);
 
 // utility functions
 void	free_array(char **array, int size);

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:31:48 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 16:27:41 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/02 15:47:05 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	print_cmdln(t_array *array)
 		j = 0;
 		printf("\n");
 		print_redir(array, i);
-		printf("tokens = %s\n", array->cmd_group[i].cmd);
-		printf("token = ");
+		printf("command = %s\n", array->cmd_group[i].cmd);
+		printf("tokens = ");
 		while (j < array->cmd_group[i].size)
 		{
 			printf("%s", array->cmd_group[i].token[j++]);

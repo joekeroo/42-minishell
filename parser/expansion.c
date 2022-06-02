@@ -6,26 +6,38 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:46:23 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 20:03:11 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/02 16:51:07 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	int	is_string(char *s)
+static	int	countexpansion(char *str)
 {
-	if (s[0] == '>' || s[0] == '<')
-		return (0);
-	else
-		return (1);
+	int	size;
+
+	size = outsidequotes(str);
+	return (size);
 }
 
 static	void	expand(t_array *array, int curr, int i)
 {
-	(void)array;
-	(void)curr;
-	(void)i;
-	return ;
+	int		j;
+	int		k;
+	int		size;
+	// char	*temp;
+
+	j = 0;
+	k = 0;
+	printf("before size: %d\n", ft_strlen(array->cmd_group[curr].token[i]));
+	size = countexpansion(array->cmd_group[curr].token[i]);
+	printf("after size: %d\n", size);
+	// temp = malloc(sizeof(char) * size + 1);
+	// while (array->cmd_group[curr].token[i][j])
+	// {
+	// 	j++;
+	// }
+	// temp[k] = '\0';
 }
 
 void	check_expansion(t_array *array)
@@ -39,7 +51,8 @@ void	check_expansion(t_array *array)
 		j = 0;
 		while (j < array->cmd_group[i].size)
 		{
-			if (is_string(array->cmd_group[i].token[j]))
+			if (array->cmd_group[i].token[j][0] != '>'
+				&& array->cmd_group[i].token[j][0] != '<')
 				expand(array, i, j);
 			j++;
 		}
