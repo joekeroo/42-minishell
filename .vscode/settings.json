@@ -1,6 +1,4 @@
 {
 	"discord.silent": true,
 	"discord.workspaceElapsedTime": true,
-	"discord.detailsEditing": "Forever stuck in {file_name}",
-	"discord.largeImage": "{LANG} file killed me"
 }
