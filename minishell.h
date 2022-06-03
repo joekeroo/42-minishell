@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/02 16:37:55 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/03 16:22:58 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,13 @@ int		extraquotes(char *str, int i, int check);
 int		checkquotes(char *str, int i, char type);
 
 // expansion functions
-int		outsidequotes(char *str);
+int		envlen(char *str, int i);
+int		check_signs(char c, int type);
+int		skipquotes(char *str, int i, char c);
 void	check_expansion(t_array *array);
+void	count_expansion(char *str, int *size);
+void	replace_char(char *str, char *dest, int *i, int *j);
+char	*expand(t_array *array, int curr, int i);
 
 // parser functions
 void	parser(t_array *array);

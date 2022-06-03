@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 16:16:29 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/03 15:41:50 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	minishell(void)
 	while (1)
 	{
 		array.line = readline("minishell % ");
+		if (!array.line)
+			break ;
 		if (exit_minishell(array.line) > 0)
 			break ;
 		add_history(array.line);
-		if (lexer(&array) > 0)
+		if (array.line[0] != '\0' && lexer(&array) > 0)
 		{
 			parser(&array);
 			free_cmdgrp(&array);
