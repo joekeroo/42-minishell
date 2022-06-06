@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 16:26:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/06 11:53:31 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	int	checkcharacter(t_array *array, char *str, int i, int type)
 				return (check);
 		}
 	}
-	if (str[i] != ' ' && str[i] != '\0' && type == 1)
+	if (str[i] != ' ' && str[i] != '\n' && str[i] != '\0' && type == 1)
 		array->size++;
 	return (check);
 }
