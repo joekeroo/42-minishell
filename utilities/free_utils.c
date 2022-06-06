@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:07:24 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 16:27:50 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/06 12:27:13 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	free_cmdgrp(t_array *array)
 				array->cmd_group[i].redir.size);
 		if (array->cmd_group[i].cmd)
 			free(array->cmd_group[i].cmd);
+		free_array(array->cmd_group[i].args, array->cmd_group[i].n_arg);
 		free_array(array->cmd_group[i].token, array->cmd_group[i].size);
 		i++;
 	}
