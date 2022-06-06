@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/06 12:23:31 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/06 16:37:52 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ enum {
 	TRUNC = 3,
 	APPEND = 4
 };
+
+typedef struct s_env
+{
+	int		size;
+	char	**key;
+	char	**value;
+}	t_env;
 
 typedef struct s_redir
 {
@@ -65,7 +72,7 @@ typedef struct s_array
 }	t_array;
 
 // minishell functions
-void	minishell(void);
+void	minishell(char **envp);
 
 // lexer functions
 int		lexer(t_array *array);
@@ -100,6 +107,8 @@ void	print_args(t_array *array, int i);
 void	print_redir(t_array *array, int i);
 
 // builtin functions
-void	echo(void);
+void	echo(t_array *array);
+void	builtin(t_array *array, char **envp);
+void	export_env(t_array *array, char **envp);
 
 #endif

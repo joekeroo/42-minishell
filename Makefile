@@ -9,7 +9,7 @@ MAIN = main.c
 
 SRC = minishell.c
 
-BLTIN = builtin/echo.c
+BLTIN = builtin/echo.c builtin/builtin.c builtin/export.c
 
 UTILS = utilities/print_utils.c utilities/free_utils.c
 

@@ -6,13 +6,14 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:05:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/05/20 14:47:55 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/06 16:38:02 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	echo(void)
+void	echo(t_array *array)
 {
+	(void)array;
 	return ;
 }
