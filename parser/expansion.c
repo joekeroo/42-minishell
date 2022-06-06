@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:46:23 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/03 16:38:44 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/06 11:46:12 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	check_expansion(t_array *array)
 				&& array->cmd_group[i].token[j][0] != '<')
 			{
 				temp = expand(array, i, j);
+				free(array->cmd_group[i].token[j]);
 				array->cmd_group[i].token[j] = ft_strdup(temp);
 				free(temp);
 			}
