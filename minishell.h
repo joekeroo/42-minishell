@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/06 16:37:52 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/07 23:06:50 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ typedef struct s_array
 {
 	int		size;
 	int		n_cmdln;
+	char	*temp;
 	char	*line;
 	char	**token;
+	t_env	env;
 	t_group	*cmd_group;
 }	t_array;
 
@@ -86,10 +88,11 @@ int		checkquotes(char *str, int i, char type);
 int		envlen(char *str, int i);
 int		check_signs(char c, int type);
 int		skipquotes(char *str, int i, char c);
+char	*extract_env(char *str, int *i);
 void	check_expansion(t_array *array);
-void	count_expansion(char *str, int *size);
-void	replace_char(char *str, char *dest, int *i, int *j);
-char	*expand(t_array *array, int curr, int i);
+void	count_expansion(t_array *array, char *str, int *size);
+void	replace_char(t_array *array, char *str, int *i, int *j);
+void	expand(t_array *array, int curr, int i);
 
 // parser functions
 void	parser(t_array *array);
@@ -99,6 +102,7 @@ void	check_files(t_array *array);
 void	init_cmdgrp(t_array *array);
 
 // utility functions
+int		ft_strcmp(char *a, char *b);
 void	free_array(char **array, int size);
 void	free_cmdgrp(t_array *array);
 void	print_array(char **array);
@@ -110,5 +114,6 @@ void	print_redir(t_array *array, int i);
 void	echo(t_array *array);
 void	builtin(t_array *array, char **envp);
 void	export_env(t_array *array, char **envp);
+void	add_key_value(t_array *array, char *key, char *value);
 
 #endif

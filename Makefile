@@ -1,7 +1,7 @@
 NAME = minishell
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 LDFLAGS = -L/usr/include -lreadline
 RM = rm -f
 
@@ -9,9 +9,9 @@ MAIN = main.c
 
 SRC = minishell.c
 
-BLTIN = builtin/echo.c builtin/builtin.c builtin/export.c
+BLTIN = builtin/echo.c builtin/builtin.c builtin/export.c builtin/export_utils.c
 
-UTILS = utilities/print_utils.c utilities/free_utils.c
+UTILS = utilities/print_utils.c utilities/free_utils.c utilities/minishell_utils.c
 
 PARSER = parser/parser.c parser/lexer.c parser/lexer_utils.c parser/init_cmdgrp.c \
 		 parser/redirection.c parser/command.c parser/expansion.c parser/expansion_size.c \

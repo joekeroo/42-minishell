@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:46:23 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/06 11:46:12 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/07 22:31:30 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	check_expansion(t_array *array)
 {
 	int		i;
 	int		j;
-	char	*temp;
 
 	i = 0;
 	while (i < array->n_cmdln)
@@ -28,10 +27,10 @@ void	check_expansion(t_array *array)
 			if (array->cmd_group[i].token[j][0] != '>'
 				&& array->cmd_group[i].token[j][0] != '<')
 			{
-				temp = expand(array, i, j);
+				expand(array, i, j);
 				free(array->cmd_group[i].token[j]);
-				array->cmd_group[i].token[j] = ft_strdup(temp);
-				free(temp);
+				array->cmd_group[i].token[j] = ft_strdup(array->temp);
+				free(array->temp);
 			}
 			j++;
 		}

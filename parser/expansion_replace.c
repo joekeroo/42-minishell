@@ -6,43 +6,44 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:45:01 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/03 16:23:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/07 23:10:27 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	char	*extract_env(char *str, int *i)
-{
-	int		j;
-	int		len;
-	char	*env;
-
-	j = 0;
-	len = envlen(str, *i);
-	*i = *i + 1;
-	env = malloc(sizeof(char) * len + 1);
-	while (j < len)
-	{
-		env[j++] = str[*i];
-		*i = *i + 1;
-	}
-	env[j] = '\0';
-	return (env);
-}
-
-static	void	squotes(char *str, char *dest, int *i, int *j)
+static	void	squotes(t_array *array, char *str, int *i, int *j)
 {
 	if (str[*i] == '\'')
 	{
 		*i = *i + 1;
 		while (str[*i] != '\'')
-			replace_char(str, dest, i, j);
+			replace_char(array, str, i, j);
 		*i = *i + 1;
 	}
 }
 
-static	void	dollar(char *str, char *dest, int *i, int *j)
+static	void	my_env(t_array *array, char *env, int *j)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (k < array->env.size)
+	{
+		if (ft_strcmp(array->env.key[k], env))
+		{
+			while (array->env.key[k])
+			{
+				array->temp[*j] = array->env.key[k][i++];
+				*j = *j + 1;
+			}
+		}
+	}
+}
+
+static	void	dollar(t_array *array, char *str, int *i, int *j)
 {
 	int		k;
 	char	*env;
@@ -59,18 +60,20 @@ static	void	dollar(char *str, char *dest, int *i, int *j)
 			{
 				while (res[k])
 				{
-					dest[*j] = res[k++];
+					array->temp[*j] = res[k++];
 					*j = *j + 1;
 				}
 			}
+			else
+				my_env(array, env, j);
 			free(env);
 		}
 		else
-			replace_char(str, dest, i, j);
+			replace_char(array, str, i, j);
 	}
 }
 
-static	void	dquotes(char *str, char *dest, int *i, int *j)
+static	void	dquotes(t_array *array, char *str, int *i, int *j)
 {
 	int	len;
 
@@ -80,10 +83,10 @@ static	void	dquotes(char *str, char *dest, int *i, int *j)
 		*i = *i + 1;
 		while (*j < len)
 		{
-			dollar(str, dest, i, j);
+			dollar(array, str, i, j);
 			if (str[*i] != '\"')
 			{
-				dest[*j] = str[*i];
+				array->temp[*j] = str[*i];
 				*i = *i + 1;
 				*j = *j + 1;
 			}
@@ -94,29 +97,27 @@ static	void	dquotes(char *str, char *dest, int *i, int *j)
 	}
 }
 
-char	*expand(t_array *array, int curr, int i)
+void	expand(t_array *array, int curr, int i)
 {
 	int		j;
 	int		k;
 	int		size;
-	char	*temp;
 
 	j = 0;
 	k = 0;
 	size = ft_strlen(array->cmd_group[curr].token[i]);
-	count_expansion(array->cmd_group[curr].token[i], &size);
-	temp = malloc(sizeof(char) * size + 1);
+	count_expansion(array, array->cmd_group[curr].token[i], &size);
+	array->temp = malloc(sizeof(char) * size + 1);
 	while (j < ft_strlen(array->cmd_group[curr].token[i]))
 	{
 		if (check_signs(array->cmd_group[curr].token[i][j], 1))
 		{
-			squotes(array->cmd_group[curr].token[i], temp, &j, &k);
-			dquotes(array->cmd_group[curr].token[i], temp, &j, &k);
-			dollar(array->cmd_group[curr].token[i], temp, &j, &k);
+			squotes(array, array->cmd_group[curr].token[i], &j, &k);
+			dquotes(array, array->cmd_group[curr].token[i], &j, &k);
+			dollar(array, array->cmd_group[curr].token[i], &j, &k);
 		}
 		else
-			replace_char(array->cmd_group[curr].token[i], temp, &j, &k);
+			replace_char(array, array->cmd_group[curr].token[i], &j, &k);
 	}
-	temp[k] = '\0';
-	return (temp);
+	array->temp[k] = '\0';
 }

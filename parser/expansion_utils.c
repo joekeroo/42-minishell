@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:48:14 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/03 16:07:02 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/07 22:36:20 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,28 @@ int	skipquotes(char *str, int i, char c)
 	return (size);
 }
 
-void	replace_char(char *str, char *dest, int *i, int *j)
+char	*extract_env(char *str, int *i)
 {
-	dest[*j] = str[*i];
+	int		j;
+	int		len;
+	char	*env;
+
+	j = 0;
+	len = envlen(str, *i);
+	*i = *i + 1;
+	env = malloc(sizeof(char) * len + 1);
+	while (j < len)
+	{
+		env[j++] = str[*i];
+		*i = *i + 1;
+	}
+	env[j] = '\0';
+	return (env);
+}
+
+void	replace_char(t_array *array, char *str, int *i, int *j)
+{
+	array->temp[*j] = str[*i];
 	*i = *i + 1;
 	*j = *j + 1;
 }

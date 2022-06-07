@@ -6,15 +6,28 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/06 16:37:23 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/07 23:08:11 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static	void	init_minishell(t_array *array)
+{
+	array->env.size = 0;
+	array->env.key = NULL;
+	array->env.value = NULL;
+}
+
+static	void	free_minishell(t_array *array)
+{
+	free_array(array->env.key, array->env.size);
+	free_array(array->env.value, array->env.size);
+}
+
 static	int	exit_minishell(char *input)
 {
-	if (ft_strncmp(input, "exit", 4) == 0)
+	if (ft_strcmp(input, "exit"))
 	{
 		printf("exit\n");
 		free(input);
@@ -27,6 +40,7 @@ void	minishell(char **envp)
 {
 	t_array	array;
 
+	init_minishell(&array);
 	while (1)
 	{
 		array.line = readline("minishell % ");
@@ -44,5 +58,5 @@ void	minishell(char **envp)
 		free_array(array.token, array.size);
 		free(array.line);
 	}
-	return ;
+	free_minishell(&array);
 }

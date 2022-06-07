@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 14:08:12 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/07 21:36:07 by jhii             ###   ########.fr       */
+/*   Created: 2022/06/07 22:59:10 by jhii              #+#    #+#             */
+/*   Updated: 2022/06/07 23:12:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// print_cmdln(array);
-void	parser(t_array *array)
+int	ft_strcmp(char *a, char *b)
 {
-	init_cmdgrp(array);
-	check_expansion(array);
-	check_files(array);
-	check_cmd(array);
-	check_args(array);
+	if (ft_strlen(a) != ft_strlen(b))
+		return (0);
+	if (ft_strncmp(a, b, ft_strlen(b)) == 0)
+		return (1);
+	return (0);
 }
