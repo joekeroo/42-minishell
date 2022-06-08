@@ -6,29 +6,29 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:34:27 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 11:46:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 11:56:28 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// static	void	check_local_env(t_array *array, char *env, int len, int *size)
-// {
-// 	int	i;
+static	void	check_local_env(t_array *array, char *env, int len, int *size)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (i < array->env.size)
-// 	{
-// 		if (ft_strcmp(array->env.key[i], env))
-// 		{
-// 			*size = *size - (len + 1) - ft_strlen(env);
-// 			break ;
-// 		}
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < array->env.size)
+	{
+		if (ft_strcmp(array->env.key[i], env))
+		{
+			*size = *size - (len + 1) - ft_strlen(array->env.key[i]);
+			break ;
+		}
+		i++;
+	}
+}
 
-static	int	expandsize(char *str, int i, int *size)
+static	int	expandsize(t_array *array, char *str, int i, int *size)
 {
 	int		j;
 	int		len;
@@ -44,8 +44,8 @@ static	int	expandsize(char *str, int i, int *size)
 	res = getenv(env);
 	if (res)
 		*size = *size - ((len + 1) - ft_strlen(res));
-	// else if (array->env.key)
-	// 	check_local_env(array, env, len, size);
+	else if (array->env.key)
+		check_local_env(array, env, len, size);
 	else
 		*size = *size - (len + 1);
 	free(env);
@@ -72,7 +72,7 @@ static	int	skipwithsize(char *str, int i, int *sz)
 	return (size);
 }
 
-static	int	insidequotes(char *str, int i, int *size)
+static	int	insidequotes(t_array *array, char *str, int i, int *size)
 {
 	int	len;
 
@@ -83,7 +83,7 @@ static	int	insidequotes(char *str, int i, int *size)
 		if (str[i] == '$')
 		{
 			if (str[i + 1] == '_' || ft_isalnum(str[i + 1]))
-				i = expandsize(str, i, size);
+				i = expandsize(array, str, i, size);
 			else
 				i++;
 		}
@@ -93,7 +93,7 @@ static	int	insidequotes(char *str, int i, int *size)
 	return (i);
 }
 
-void	count_expansion(char *str, int *size)
+void	count_expansion(t_array *array, char *str, int *size)
 {
 	int	i;
 	int	temp;
@@ -107,11 +107,11 @@ void	count_expansion(char *str, int *size)
 			if (str[i] == '\'')
 				i = i + skipwithsize(str, i, size);
 			if (str[i] == '\"')
-				i = insidequotes(str, i, size);
+				i = insidequotes(array, str, i, size);
 			if (str[i] == '$')
 			{
 				if (str[i + 1] == '_' || ft_isalnum(str[i + 1]))
-					i = expandsize(str, i, size);
+					i = expandsize(array, str, i, size);
 				else
 					i++;
 			}

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 11:45:59 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 11:56:25 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		check_signs(char c, int type);
 int		skipquotes(char *str, int i, char c);
 char	*extract_env(char *str, int *i);
 void	check_expansion(t_array *array);
-void	count_expansion(char *str, int *size);
+void	count_expansion(t_array *array, char *str, int *size);
 void	replace_char(t_array *array, char *str, int *i, int *j);
 void	expand(t_array *array, int curr, int i);
 

@@ -6,13 +6,12 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:46:23 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/07 22:31:30 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 11:50:21 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// leaks on line32
 void	check_expansion(t_array *array)
 {
 	int		i;

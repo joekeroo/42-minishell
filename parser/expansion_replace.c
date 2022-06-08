@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:45:01 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 11:46:09 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 11:57:39 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@ static	void	squotes(t_array *array, char *str, int *i, int *j)
 	}
 }
 
-// static	void	my_env(t_array *array, char *env, int *j)
-// {
-// 	int	i;
-// 	int	k;
+static	void	my_env(t_array *array, char *env, int *j)
+{
+	int	i;
+	int	k;
 
-// 	i = 0;
-// 	k = 0;
-// 	while (k < array->env.size)
-// 	{
-// 		if (ft_strcmp(array->env.key[k], env))
-// 		{
-// 			while (array->env.key[k])
-// 			{
-// 				array->temp[*j] = array->env.key[k][i++];
-// 				*j = *j + 1;
-// 			}
-// 		}
-// 	}
-// }
+	i = 0;
+	k = 0;
+	while (k < array->env.size)
+	{
+		if (ft_strcmp(array->env.key[k], env))
+		{
+			while (array->env.key[k][i])
+			{
+				array->temp[*j] = array->env.key[k][i++];
+				*j = *j + 1;
+			}
+		}
+	}
+}
 
 static	void	dollar(t_array *array, char *str, int *i, int *j)
 {
@@ -64,8 +64,8 @@ static	void	dollar(t_array *array, char *str, int *i, int *j)
 					*j = *j + 1;
 				}
 			}
-			// else
-			// 	my_env(array, env, j);
+			else
+				my_env(array, env, j);
 			free(env);
 		}
 		else
@@ -106,7 +106,7 @@ void	expand(t_array *array, int curr, int i)
 	j = 0;
 	k = 0;
 	size = ft_strlen(array->cmd_group[curr].token[i]);
-	count_expansion(array->cmd_group[curr].token[i], &size);
+	count_expansion(array, array->cmd_group[curr].token[i], &size);
 	array->temp = malloc(sizeof(char) * size + 1);
 	while (j < ft_strlen(array->cmd_group[curr].token[i]))
 	{
