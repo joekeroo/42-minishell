@@ -6,13 +6,13 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:38:09 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/07 23:07:54 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 13:34:49 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	print_env_exp(t_array *array)
+static	void	print_export(t_array *array)
 {
 	int	i;
 
@@ -26,30 +26,6 @@ static	void	print_env_exp(t_array *array)
 		printf("\"\n");
 		i++;
 	}
-}
-
-static	void	print_export(t_array *array, char **envp)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (envp[i])
-	{
-		j = 0;
-		printf("declare -x ");
-		while (envp[i][j])
-		{
-			if (envp[i][j] == '=')
-				printf("=\"");
-			else
-				printf("%c", envp[i][j]);
-			j++;
-		}
-		printf("\"\n");
-		i++;
-	}
-	print_env_exp(array);
 }
 
 // type[1 = key, 2 = value]
@@ -106,7 +82,7 @@ static	void	add_env(t_array *array, char *str)
 	free(curr_value);
 }
 
-void	export_env(t_array *array, char **envp)
+void	export_env(t_array *array)
 {
 	int	i;
 	int	res;
@@ -116,7 +92,7 @@ void	export_env(t_array *array, char **envp)
 	if (ft_strcmp(array->cmd_group[0].cmd, "export"))
 	{
 		if (array->cmd_group[0].n_arg == 0)
-			print_export(array, envp);
+			print_export(array);
 		else
 		{
 			i = 0;

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 11:56:25 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 15:39:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_group
 
 typedef struct s_array
 {
+	int		toggle_info;
 	int		size;
 	int		n_cmdln;
 	char	*temp;
@@ -111,8 +112,12 @@ void	print_redir(t_array *array, int i);
 
 // builtin functions
 void	echo(t_array *array);
-void	builtin(t_array *array, char **envp);
-void	export_env(t_array *array, char **envp);
+void	print_env(t_array *array, int i);
+void	init_env(t_array *array, char **envp);
+void	builtin(t_array *array);
+void	unset_env(t_array *array);
+void	export_env(t_array *array);
+void	remove_key_value(t_array *array, char *key);
 void	add_key_value(t_array *array, char *key, char *value);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:34:27 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 11:56:28 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 14:40:04 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	check_local_env(t_array *array, char *env, int len, int *size)
+static	void	check_env(t_array *array, char *env, int len, int *size)
 {
 	int	i;
 
@@ -21,11 +21,12 @@ static	void	check_local_env(t_array *array, char *env, int len, int *size)
 	{
 		if (ft_strcmp(array->env.key[i], env))
 		{
-			*size = *size - (len + 1) - ft_strlen(array->env.key[i]);
-			break ;
+			*size = *size - ((len + 1) - ft_strlen(array->env.value[i]));
+			return ;
 		}
 		i++;
 	}
+	*size = *size - (len + 1);
 }
 
 static	int	expandsize(t_array *array, char *str, int i, int *size)
@@ -33,7 +34,6 @@ static	int	expandsize(t_array *array, char *str, int i, int *size)
 	int		j;
 	int		len;
 	char	*env;
-	char	*res;
 
 	j = 0;
 	len = envlen(str, i++);
@@ -41,13 +41,7 @@ static	int	expandsize(t_array *array, char *str, int i, int *size)
 	while (j < len)
 		env[j++] = str[i++];
 	env[j] = '\0';
-	res = getenv(env);
-	if (res)
-		*size = *size - ((len + 1) - ft_strlen(res));
-	else if (array->env.key)
-		check_local_env(array, env, len, size);
-	else
-		*size = *size - (len + 1);
+	check_env(array, env, len, size);
 	free(env);
 	return (i);
 }

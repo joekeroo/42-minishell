@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:45:01 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 11:57:39 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 14:40:21 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,33 @@ static	void	my_env(t_array *array, char *env, int *j)
 	int	i;
 	int	k;
 
-	i = 0;
 	k = 0;
 	while (k < array->env.size)
 	{
 		if (ft_strcmp(array->env.key[k], env))
 		{
-			while (array->env.key[k][i])
+			i = 0;
+			while (array->env.value[k][i])
 			{
-				array->temp[*j] = array->env.key[k][i++];
+				array->temp[*j] = array->env.value[k][i++];
 				*j = *j + 1;
 			}
+			break ;
 		}
+		k++;
 	}
 }
 
 static	void	dollar(t_array *array, char *str, int *i, int *j)
 {
-	int		k;
 	char	*env;
-	char	*res;
 
 	if (str[*i] == '$')
 	{
 		if (check_signs(str[*i + 1], 2))
 		{
-			k = 0;
 			env = extract_env(str, i);
-			res = getenv(env);
-			if (res)
-			{
-				while (res[k])
-				{
-					array->temp[*j] = res[k++];
-					*j = *j + 1;
-				}
-			}
-			else
-				my_env(array, env, j);
+			my_env(array, env, j);
 			free(env);
 		}
 		else
