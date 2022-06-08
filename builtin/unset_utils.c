@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 15:28:20 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 16:11:25 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ void	remove_key_value(t_array *array, char *key)
 	array->env.value = malloc(sizeof(char *) * array->env.size);
 	while (i < array->env.size + 1)
 	{
-		if (ft_strcmp(temp_key[i], key))
-			i++;
-		array->env.key[j] = ft_strdup(temp_key[i]);
-		array->env.value[j++] = ft_strdup(temp_value[i++]);
+		if (ft_strcmp(temp_key[i], key) == 0)
+		{
+			array->env.key[j] = ft_strdup(temp_key[i]);
+			array->env.value[j] = ft_strdup(temp_value[i]);
+			j++;
+		}
+		i++;
 	}
 	free_array(temp_key, array->env.size + 1);
 	free_array(temp_value, array->env.size + 1);
