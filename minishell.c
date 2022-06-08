@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 15:39:54 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/08 17:19:18 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static	void	init_minishell(t_array *array, char **envp)
 {
+	array->exit = 0;
+	array->exitstat = 0;
 	array->toggle_info = 0;
 	array->env.size = 0;
 	array->env.key = NULL;
@@ -27,17 +29,6 @@ static	void	free_minishell(t_array *array)
 	free_array(array->env.value, array->env.size);
 }
 
-static	int	exit_minishell(char *input)
-{
-	if (ft_strcmp(input, "exit"))
-	{
-		printf("exit\n");
-		free(input);
-		return (1);
-	}
-	return (0);
-}
-
 void	minishell(char **envp)
 {
 	t_array	array;
@@ -48,8 +39,6 @@ void	minishell(char **envp)
 		array.line = readline("minishell % ");
 		if (!array.line)
 			break ;
-		if (exit_minishell(array.line) > 0)
-			break ;
 		add_history(array.line);
 		if (array.line[0] != '\0' && lexer(&array) > 0)
 		{
@@ -59,6 +48,10 @@ void	minishell(char **envp)
 		}
 		free_array(array.token, array.size);
 		free(array.line);
+		if (array.exit == 1)
+			break ;
 	}
 	free_minishell(&array);
+	system("leaks minishell");
+	exit(array.exitstat);
 }
