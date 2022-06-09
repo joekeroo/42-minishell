@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 16:22:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 17:29:34 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:05:12 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,28 @@ static	int	is_number(char *str)
 	return (1);
 }
 
-void	exit_minishell(t_array *array)
+void	exit_minishell(t_array *array, int prc)
 {
-	if (array->n_cmdln > 1)
-		return ;
-	if (array->cmd_group[0].cmd)
+	if (array->cmd_group[prc].cmd)
 	{
-		if (ft_strcmp(array->cmd_group[0].cmd, "exit"))
+		if (ft_strcmp(array->cmd_group[prc].cmd, "exit"))
 		{
-			if (array->cmd_group[0].n_arg > 1)
+			if (array->cmd_group[prc].n_arg > 1)
 			{
 				printf("minishell: exit: too many arguments\n");
 				return ;
 			}
 			array->exit = 1;
 			printf("exit\n");
-			if (array->cmd_group[0].n_arg == 0)
+			if (array->cmd_group[prc].n_arg == 0)
 				array->exitstat = 0;
-			else if (is_number(array->cmd_group[0].args[0]))
-				array->exitstat = ft_atoi(array->cmd_group[0].args[0]) % 256;
+			else if (is_number(array->cmd_group[prc].args[0]))
+				array->exitstat = ft_atoi(array->cmd_group[prc].args[0]) % 256;
 			else
 			{
 				array->exitstat = 255;
-				printf("bash: exit: %s: numeric argument required\n",
-					array->cmd_group[0].args[0]);
+				printf("minishell: exit: %s: numeric argument required\n",
+					array->cmd_group[prc].args[0]);
 			}
 		}
 	}

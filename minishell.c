@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 17:19:18 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/09 14:57:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	minishell(char **envp)
 		if (array.line[0] != '\0' && lexer(&array) > 0)
 		{
 			parser(&array);
-			builtin(&array);
+			builtin(&array, 0);
 			free_cmdgrp(&array);
 		}
 		free_array(array.token, array.size);

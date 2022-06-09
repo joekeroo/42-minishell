@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:52:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 16:03:57 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:08:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,25 @@ static	int	find_env(t_array *array, char *str)
 	return (0);
 }
 
-void	unset_env(t_array *array)
+void	unset_env(t_array *array, int prc)
 {
 	int	i;
 
-	if (array->n_cmdln > 1)
-		return ;
-	if (array->cmd_group[0].cmd)
+	i = 0;
+	if (array->cmd_group[prc].cmd)
 	{
-		if (ft_strcmp(array->cmd_group[0].cmd, "unset"))
+		if (ft_strcmp(array->cmd_group[prc].cmd, "unset"))
 		{
-			i = 0;
-			while (i < array->cmd_group[0].n_arg)
+			while (i < array->cmd_group[prc].n_arg)
 			{
-				if (find_env(array, array->cmd_group[0].args[i]))
-					remove_key_value(array, array->cmd_group[0].args[i]);
+				if (ft_isdigit(array->cmd_group[prc].args[i][0]) == 0)
+				{
+					if (find_env(array, array->cmd_group[prc].args[i]))
+						remove_key_value(array, array->cmd_group[prc].args[i]);
+				}
+				else
+					printf("minishell: unset: `%s': not a valid identifier\n",
+						array->cmd_group[prc].args[i]);
 				i++;
 			}
 		}

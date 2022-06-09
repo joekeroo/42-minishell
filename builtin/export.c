@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:38:09 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 13:34:49 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:06:43 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,35 @@ static	void	add_env(t_array *array, char *str)
 	free(curr_value);
 }
 
-void	export_env(t_array *array)
+static	void	error_check(t_array *array, int curr)
 {
 	int	i;
-	int	res;
 
-	if (array->n_cmdln > 1 || !array->cmd_group[0].cmd)
-		return ;
-	if (ft_strcmp(array->cmd_group[0].cmd, "export"))
+	i = 0;
+	while (i < array->cmd_group[curr].n_arg)
 	{
-		if (array->cmd_group[0].n_arg == 0)
-			print_export(array);
-		else
+		if (ft_isdigit(array->cmd_group[curr].args[i][0]) == 0)
 		{
-			i = 0;
-			res = 0;
-			while (i < array->cmd_group[0].n_arg)
-			{
-				if (ft_strchr(array->cmd_group[0].args[i], '='))
-					add_env(array, array->cmd_group[0].args[i]);
-				i++;
-			}
+			if (ft_strchr(array->cmd_group[curr].args[i], '='))
+				add_env(array, array->cmd_group[curr].args[i]);
+		}
+		else
+			printf("minishell: export: `%s': not a valid identifier\n",
+				array->cmd_group[curr].args[i]);
+		i++;
+	}
+}
+
+void	export_env(t_array *array, int prc)
+{
+	if (array->cmd_group[prc].cmd)
+	{
+		if (ft_strcmp(array->cmd_group[prc].cmd, "export"))
+		{
+			if (array->cmd_group[prc].n_arg == 0)
+				print_export(array);
+			else
+				error_check(array, prc);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 13:59:53 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:17:23 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,23 @@ void	init_env(t_array *array, char **envp)
 	}
 }
 
-void	print_env(t_array *array, int i)
+void	print_env(t_array *array, int prc)
 {
 	int	j;
 
-	if (ft_strcmp(array->cmd_group[i].cmd, "env"))
+	if (ft_strcmp(array->cmd_group[prc].cmd, "env"))
 	{
-		j = 0;
-		while (j < array->env.size)
+		if (array->cmd_group[prc].n_arg == 0)
 		{
-			printf("%s=%s\n", array->env.key[j], array->env.value[j]);
-			j++;
+			j = 0;
+			while (j < array->env.size)
+			{
+				printf("%s=%s\n", array->env.key[j], array->env.value[j]);
+				j++;
+			}
 		}
+		else
+			printf("env: %s: No such file or directory\n",
+				array->cmd_group[prc].args[0]);
 	}
 }

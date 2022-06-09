@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 17:19:09 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/09 15:28:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,16 @@ void	print_args(t_array *array, int i);
 void	print_redir(t_array *array, int i);
 
 // builtin functions
-void	echo(t_array *array);
-void	exit_minishell(t_array *array);
-void	print_env(t_array *array, int i);
+void	builtin(t_array *array, int prc);
+void	echo(t_array *array, int prc);
+void	cd_path(t_array *array, int prc);
 void	init_env(t_array *array, char **envp);
-void	builtin(t_array *array);
-void	unset_env(t_array *array);
-void	export_env(t_array *array);
+void	print_env(t_array *array, int prc);
+void	unset_env(t_array *array, int prc);
+void	print_pwd(t_array *array, int prc);
 void	remove_key_value(t_array *array, char *key);
+void	export_env(t_array *array, int prc);
 void	add_key_value(t_array *array, char *key, char *value);
+void	exit_minishell(t_array *array, int prc);
 
 #endif
