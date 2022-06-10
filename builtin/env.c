@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/09 15:17:23 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/10 15:00:53 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ void	print_env(t_array *array, int prc)
 				printf("%s=%s\n", array->env.key[j], array->env.value[j]);
 				j++;
 			}
+			array->exitstat = 0;
 		}
 		else
+		{
+			array->exitstat = 127;
 			printf("env: %s: No such file or directory\n",
 				array->cmd_group[prc].args[0]);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:48:14 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/07 22:36:20 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/10 16:14:06 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,18 @@ int	envlen(char *str, int i)
 
 	i++;
 	size = 0;
-	while (str[i])
+	if (str[i] == '?')
+		size++;
+	else
 	{
-		if (str[i] == '_' || ft_isalnum(str[i]))
-			size++;
-		else
-			break ;
-		i++;
+		while (str[i])
+		{
+			if (str[i] == '_' || ft_isalnum(str[i]))
+				size++;
+			else
+				break ;
+			i++;
+		}
 	}
 	return (size);
 }

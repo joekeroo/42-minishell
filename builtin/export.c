@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:38:09 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/09 15:06:43 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/10 15:06:27 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static	void	print_export(t_array *array)
 		printf("\"\n");
 		i++;
 	}
+	array->exitstat = 0;
 }
 
 // type[1 = key, 2 = value]
@@ -85,8 +86,10 @@ static	void	add_env(t_array *array, char *str)
 static	void	error_check(t_array *array, int curr)
 {
 	int	i;
+	int	check;
 
 	i = 0;
+	check = 0;
 	while (i < array->cmd_group[curr].n_arg)
 	{
 		if (ft_isdigit(array->cmd_group[curr].args[i][0]) == 0)
@@ -95,10 +98,17 @@ static	void	error_check(t_array *array, int curr)
 				add_env(array, array->cmd_group[curr].args[i]);
 		}
 		else
+		{
+			check = 1;
 			printf("minishell: export: `%s': not a valid identifier\n",
 				array->cmd_group[curr].args[i]);
+		}
 		i++;
 	}
+	if (check == 1)
+		array->exitstat = 1;
+	else
+		array->exitstat = 0;
 }
 
 void	export_env(t_array *array, int prc)

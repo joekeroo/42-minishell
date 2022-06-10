@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:45:01 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 14:40:21 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/10 16:06:02 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,27 @@ static	void	squotes(t_array *array, char *str, int *i, int *j)
 
 static	void	my_env(t_array *array, char *env, int *j)
 {
-	int	i;
-	int	k;
+	int		i;
+	int		k;
+	char	*temp;
 
 	k = 0;
 	while (k < array->env.size)
 	{
+		i = 0;
+		temp = NULL;
 		if (ft_strcmp(array->env.key[k], env))
+			temp = ft_strdup(array->env.value[k]);
+		else if (env[0] == '?')
+			temp = ft_itoa(array->exitstat);
+		if (temp)
 		{
-			i = 0;
-			while (array->env.value[k][i])
+			while (temp[i])
 			{
-				array->temp[*j] = array->env.value[k][i++];
+				array->temp[*j] = temp[i++];
 				*j = *j + 1;
 			}
+			free(temp);
 			break ;
 		}
 		k++;
@@ -51,7 +58,7 @@ static	void	dollar(t_array *array, char *str, int *i, int *j)
 
 	if (str[*i] == '$')
 	{
-		if (check_signs(str[*i + 1], 2))
+		if (check_signs(str[*i + 1], 2) || str[*i + 1] == '?')
 		{
 			env = extract_env(str, i);
 			my_env(array, env, j);

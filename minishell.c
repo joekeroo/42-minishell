@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/09 14:57:42 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/10 16:23:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	minishell(char **envp)
 			parser(&array);
 			builtin(&array, 0);
 			free_cmdgrp(&array);
+			free_array(array.token, array.size);
 		}
-		free_array(array.token, array.size);
 		free(array.line);
 		if (array.exit == 1)
 			break ;
