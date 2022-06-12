@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/09 15:28:42 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:03:47 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_array
 	int		n_cmdln;
 	int		exitstat;
 	int		toggle_info;
+	int		cd_count;
+	char	*pwd;
+	char	*old_pwd;
 	char	*temp;
 	char	*line;
 	char	**token;
@@ -121,6 +124,7 @@ void	print_env(t_array *array, int prc);
 void	unset_env(t_array *array, int prc);
 void	print_pwd(t_array *array, int prc);
 void	remove_key_value(t_array *array, char *key);
+void	add_env(t_array *array, char *str);
 void	export_env(t_array *array, int prc);
 void	add_key_value(t_array *array, char *key, char *value);
 void	exit_minishell(t_array *array, int prc);

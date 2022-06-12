@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/10 16:23:08 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:04:07 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 static	void	init_minishell(t_array *array, char **envp)
 {
 	array->exit = 0;
+	array->cd_count = 0;
 	array->exitstat = 0;
 	array->toggle_info = 0;
 	array->env.size = 0;
 	array->env.key = NULL;
 	array->env.value = NULL;
+	array->pwd = NULL;
+	array->old_pwd = NULL;
 	init_env(array, envp);
 }
 
 static	void	free_minishell(t_array *array)
 {
+	if (array->pwd)
+		free(array->pwd);
+	if (array->old_pwd)
+		free(array->old_pwd);
 	free_array(array->env.key, array->env.size);
 	free_array(array->env.value, array->env.size);
 }

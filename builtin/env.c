@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/10 15:00:53 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:04:23 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,20 @@ void	init_env(t_array *array, char **envp)
 	{
 		key = extr_env(envp[i], 1);
 		value = extr_env(envp[i], 2);
+		if (ft_strcmp(key, "PWD"))
+			array->pwd = ft_strdup(value);
 		array->env.key[i] = ft_strdup(key);
-		array->env.value[i] = ft_strdup(value);
+		array->env.value[i++] = ft_strdup(value);
 		free(key);
 		free(value);
-		i++;
 	}
+}
+
+static	void	print_error(t_array *array, int prc)
+{
+	array->exitstat = 127;
+	printf("env: %s: No such file or directory\n",
+		array->cmd_group[prc].args[0]);
 }
 
 void	print_env(t_array *array, int prc)
@@ -72,16 +80,19 @@ void	print_env(t_array *array, int prc)
 			j = 0;
 			while (j < array->env.size)
 			{
-				printf("%s=%s\n", array->env.key[j], array->env.value[j]);
+				if (ft_strcmp(array->env.key[j], "OLDPWD"))
+				{
+					if (array->cd_count > 0)
+						printf("%s=%s\n", array->env.key[j],
+							array->env.value[j]);
+				}
+				else
+					printf("%s=%s\n", array->env.key[j], array->env.value[j]);
 				j++;
 			}
 			array->exitstat = 0;
 		}
 		else
-		{
-			array->exitstat = 127;
-			printf("env: %s: No such file or directory\n",
-				array->cmd_group[prc].args[0]);
-		}
+			print_error(array, prc);
 	}
 }
