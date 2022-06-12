@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:05:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/12 14:25:11 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:40:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static	int	check_nl(char *str)
 	return (1);
 }
 
+static	int	print_msg(t_array *array, int prc, int i)
+{
+	printf("%s", array->cmd_group[prc].args[i]);
+	return (1);
+}
+
 void	echo(t_array *array, int prc)
 {
 	int	i;
@@ -35,6 +41,8 @@ void	echo(t_array *array, int prc)
 	i = 0;
 	nl = 1;
 	start = 0;
+	if (!array->cmd_group[prc].cmd)
+		return ;
 	if (ft_strcmp(array->cmd_group[prc].cmd, "echo"))
 	{
 		array->exitstat = 0;
@@ -43,10 +51,7 @@ void	echo(t_array *array, int prc)
 			if (check_nl(array->cmd_group[prc].args[i]) && start == 0)
 				nl = 0;
 			else
-			{
-				start = 1;
-				printf("%s", array->cmd_group[prc].args[i]);
-			}
+				start = print_msg(array, prc, i);
 			if (++i < array->cmd_group[prc].n_arg && start == 1)
 				printf(" ");
 		}

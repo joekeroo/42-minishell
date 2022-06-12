@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/12 15:04:23 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:37:44 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ void	init_env(t_array *array, char **envp)
 	}
 }
 
+static	void	print_msg(t_array *array, int j)
+{
+	if (array->cd_count > 0)
+		printf("%s=%s\n", array->env.key[j],
+			array->env.value[j]);
+}
+
 static	void	print_error(t_array *array, int prc)
 {
 	array->exitstat = 127;
@@ -73,6 +80,8 @@ void	print_env(t_array *array, int prc)
 {
 	int	j;
 
+	if (!array->cmd_group[prc].cmd)
+		return ;
 	if (ft_strcmp(array->cmd_group[prc].cmd, "env"))
 	{
 		if (array->cmd_group[prc].n_arg == 0)
@@ -81,11 +90,7 @@ void	print_env(t_array *array, int prc)
 			while (j < array->env.size)
 			{
 				if (ft_strcmp(array->env.key[j], "OLDPWD"))
-				{
-					if (array->cd_count > 0)
-						printf("%s=%s\n", array->env.key[j],
-							array->env.value[j]);
-				}
+					print_msg(array, j);
 				else
 					printf("%s=%s\n", array->env.key[j], array->env.value[j]);
 				j++;

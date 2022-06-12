@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:31:32 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/12 15:14:02 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/12 15:30:05 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // update array->pwd && array->old_pwd && env
 void	cd_path(t_array *array, int prc)
 {
+	if (!array->cmd_group[prc].cmd)
+		return ;
 	if (ft_strcmp(array->cmd_group[prc].cmd, "cd"))
 	{
 		array->cd_count++;
