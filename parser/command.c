@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:09:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 18:09:13 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/13 14:04:07 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static	int	is_redir(t_array *array, int curr, int i)
 {
-	if (array->cmd_group[curr].token[i][0] == '>'
-		|| array->cmd_group[curr].token[i][0] == '<')
+	if (array->cmd_group[curr].type[i] == 1)
 		return (1);
 	return (0);
 }

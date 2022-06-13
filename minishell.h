@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/12 15:03:47 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/13 13:44:29 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_group
 {
 	int		size;
 	int		n_arg;
+	int		*type;
 	char	*cmd;
 	char	**args;
 	char	**token;

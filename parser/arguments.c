@@ -6,13 +6,13 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 12:01:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/06 16:43:53 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/13 14:03:35 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	int	count_args(char **token, int size)
+static	int	count_args(int *type, int size)
 {
 	int	i;
 	int	res;
@@ -21,7 +21,7 @@ static	int	count_args(char **token, int size)
 	res = 0;
 	while (i < size)
 	{
-		if (token[i][0] == '>' || token[i][0] == '<')
+		if (type[i] == 1 || type[i] == 1)
 			i++;
 		else
 			res++;
@@ -43,8 +43,7 @@ static	void	get_args(t_array *array, int i)
 	cmd = 0;
 	while (j < array->cmd_group[i].size)
 	{
-		if (array->cmd_group[i].token[j][0] == '>'
-			|| array->cmd_group[i].token[j][0] == '<')
+		if (array->cmd_group[i].type[j] == 1)
 			j++;
 		else
 		{
@@ -65,7 +64,7 @@ void	check_args(t_array *array)
 	while (i < array->n_cmdln)
 	{
 		array->cmd_group[i].n_arg
-			= count_args(array->cmd_group[i].token, array->cmd_group[i].size);
+			= count_args(array->cmd_group[i].type, array->cmd_group[i].size);
 		array->cmd_group[i].args
 			= malloc(sizeof(char *) * array->cmd_group[i].n_arg);
 		get_args(array, i);

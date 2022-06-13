@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:34:36 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/01 16:26:44 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/13 14:00:21 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,33 @@ static	void	init_array(t_array *array)
 		j++;
 		array->cmd_group[i].token = malloc(sizeof(char *)
 				* array->cmd_group[i].size);
+		array->cmd_group[i].type = malloc(sizeof(int)
+				* array->cmd_group[i].size);
 		i++;
 	}
+}
+
+static	int	dup_token(t_array *array, int i, int j)
+{
+	int	k;
+
+	k = 0;
+	if (j < array->size && array->token[j][0] == '|')
+		j++;
+	while (k < array->cmd_group[i].size)
+	{
+		array->cmd_group[i].type[k] = 0;
+		if (array->token[j][0] == '>' || array->token[j][0] == '<')
+			array->cmd_group[i].type[k] = 1;
+		array->cmd_group[i].token[k++] = ft_strdup(array->token[j++]);
+	}
+	return (j);
 }
 
 void	init_cmdgrp(t_array *array)
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = 0;
 	array->n_cmdln = 0;
@@ -57,11 +75,7 @@ void	init_cmdgrp(t_array *array)
 	j = 0;
 	while (i < array->n_cmdln)
 	{
-		k = 0;
-		if (j < array->size && array->token[j][0] == '|')
-			j++;
-		while (k < array->cmd_group[i].size)
-			array->cmd_group[i].token[k++] = ft_strdup(array->token[j++]);
+		j = dup_token(array, i, j);
 		i++;
 	}
 }

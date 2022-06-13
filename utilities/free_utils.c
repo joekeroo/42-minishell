@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:07:24 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/07 21:22:36 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/13 13:51:14 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	free_cmdgrp(t_array *array)
 	i = 0;
 	while (i < array->n_cmdln)
 	{
+		if (array->cmd_group[i].type)
+			free(array->cmd_group[i].type);
 		if (array->cmd_group[i].redir.infile)
 			free(array->cmd_group[i].redir.infile);
 		if (array->cmd_group[i].redir.outfile)
