@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:34:36 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/13 14:00:21 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/14 13:03:30 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ void	init_cmdgrp(t_array *array)
 	j = 0;
 	while (i < array->n_cmdln)
 	{
+		array->cmd_group[i].files.in_status = 0;
+		array->cmd_group[i].files.out_status = 0;
+		array->cmd_group[i].files.curr_stdin = dup(0);
+		array->cmd_group[i].files.curr_stdout = dup(1);
 		j = dup_token(array, i, j);
 		i++;
 	}

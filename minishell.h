@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/13 13:44:29 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/14 14:07:02 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ typedef struct s_env
 	char	**value;
 }	t_env;
 
+typedef struct s_files
+{
+	int	infile;
+	int	outfile;
+	int	in_status;
+	int	out_status;
+	int	curr_stdin;
+	int	curr_stdout;
+}	t_files;
+
 typedef struct s_redir
 {
 	int		size;
@@ -58,8 +68,10 @@ typedef struct s_group
 	int		n_arg;
 	int		*type;
 	char	*cmd;
+	char	*heredoc;
 	char	**args;
 	char	**token;
+	t_files	files;
 	t_redir	redir;
 }	t_group;
 
@@ -117,6 +129,8 @@ void	print_args(t_array *array, int i);
 void	print_redir(t_array *array, int i);
 
 // builtin functions
+int		checkfiles(t_array *array, int prc);
+int		redir_file(t_array *array, int prc);
 void	builtin(t_array *array, int prc);
 void	echo(t_array *array, int prc);
 void	cd_path(t_array *array, int prc);
