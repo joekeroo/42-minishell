@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:32:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/14 13:50:12 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 14:41:13 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	checkfiles(t_array *array, int prc)
 	i = 0;
 	while (i < array->cmd_group[prc].redir.size)
 	{
-		if (array->cmd_group[prc].redir.types[i] == HEREDOC
-			|| array->cmd_group[prc].redir.types[i] == INFILE)
+		if (array->cmd_group[prc].redir.types[i] == INFILE)
 		{
 			if (checkfd(array->cmd_group[prc].redir.files[i], 1) < 0)
 				return (-1);

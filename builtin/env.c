@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 11:52:06 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 16:22:58 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static	void	print_error(t_array *array, int prc)
 		array->cmd_group[prc].args[0]);
 }
 
-void	print_env(t_array *array, int prc)
+int	print_env(t_array *array, int prc)
 {
 	int	j;
 
 	if (!array->cmd_group[prc].cmd)
-		return ;
+		return (0);
 	if (check_env(array->cmd_group[prc].cmd))
 	{
 		if (array->cmd_group[prc].n_arg == 0)
@@ -62,5 +62,7 @@ void	print_env(t_array *array, int prc)
 		}
 		else
 			print_error(array, prc);
+		return (1);
 	}
+	return (0);
 }

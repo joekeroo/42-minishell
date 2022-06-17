@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:52:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/13 19:10:05 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 16:23:31 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,13 @@ static	void	error_check(t_array *array, int prc)
 	check_exitstat(array, check);
 }
 
-void	unset_env(t_array *array, int prc)
+int	unset_env(t_array *array, int prc)
 {
 	if (array->cmd_group[prc].cmd)
 	{
 		if (ft_strcmp(array->cmd_group[prc].cmd, "unset"))
 			error_check(array, prc);
+		return (1);
 	}
+	return (0);
 }

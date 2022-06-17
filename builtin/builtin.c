@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:34:15 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/14 14:12:19 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 16:27:22 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	builtin(t_array *array, int prc)
 	unset_env(array, prc);
 	check_dup(array, prc);
 	exit_minishell(array, prc);
+	// run_exec(array, prc);
 }

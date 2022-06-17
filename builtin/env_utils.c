@@ -6,11 +6,28 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:50:00 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 11:51:13 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 15:39:01 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static	char	**duplicate_array(char **array, int size)
+{
+	int		i;
+	char	**temp;
+
+	if (!array)
+		return (NULL);
+	i = 0;
+	temp = malloc(sizeof(char *) * size);
+	while (i < size)
+	{
+		temp[i] = ft_strdup(array[i]);
+		i++;
+	}
+	return (temp);
+}
 
 // type[1 = key, 2 = value]
 static	char	*extr_env(char *str, int type)
@@ -38,6 +55,26 @@ static	char	*extr_env(char *str, int type)
 	return (temp);
 }
 
+char	*get_env_value(t_array *array, char *key)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	temp = NULL;
+	while (i < array->env.size)
+	{
+		if (ft_strcmp(array->env.key[i], key))
+		{
+			temp = ft_strdup(array->env.value[i]);
+			break ;
+		}
+		i++;
+	}
+	return (temp);
+}
+
+// line 68: duplicate envp into own en_var
 void	init_env(t_array *array, char **envp)
 {
 	int		i;
@@ -47,6 +84,7 @@ void	init_env(t_array *array, char **envp)
 	i = 0;
 	while (envp[array->env.size])
 		array->env.size++;
+	array->en_var = duplicate_array(envp, array->env.size);
 	array->env.key = malloc(sizeof(char *) * array->env.size);
 	array->env.value = malloc(sizeof(char *) * array->env.size);
 	while (i < array->env.size)

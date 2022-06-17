@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/14 14:26:20 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 14:17:45 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static	void	init_minishell(t_array *array, char **envp)
 {
+	array->i = 0;
 	array->exit = 0;
 	array->cd_count = 0;
 	array->exitstat = 0;
