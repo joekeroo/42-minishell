@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:05:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/13 19:10:41 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/17 11:53:29 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ static	int	print_msg(t_array *array, int prc, int i)
 	return (1);
 }
 
+static	int	check_echo(char *str)
+{
+	if (ft_strlen(str) != 4)
+		return (0);
+	if (str[0] != 'e' && str[0] != 'E')
+		return (0);
+	if (str[1] != 'c' && str[1] != 'C')
+		return (0);
+	if (str[2] != 'h' && str[2] != 'H')
+		return (0);
+	if (str[3] != 'o' && str[3] != 'O')
+		return (0);
+	return (1);
+}
+
 void	echo(t_array *array, int prc)
 {
 	int	i;
@@ -43,7 +58,7 @@ void	echo(t_array *array, int prc)
 	start = 0;
 	if (!array->cmd_group[prc].cmd)
 		return ;
-	if (ft_strcmp(array->cmd_group[prc].cmd, "echo"))
+	if (check_echo(array->cmd_group[prc].cmd))
 	{
 		array->exitstat = 0;
 		while (i < array->cmd_group[prc].n_arg)
