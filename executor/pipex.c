@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:36:50 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:47:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 21:36:53 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ void	pipex(t_array *array)
 
 	if (exit_minishell(array, 0))
 		return ;
-	array->process = malloc(sizeof(int) * array->n_cmdln);
-	run_pipex(array, fd);
-	free(array->process);
+	if (array->n_cmdln > 1)
+	{
+		array->process = malloc(sizeof(int) * array->n_cmdln);
+		run_pipex(array, fd);
+		free(array->process);
+	}
+	else
+		builtin(array, 0);
 }

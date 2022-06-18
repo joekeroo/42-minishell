@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:03:27 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 21:41:29 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static	int	check_path(t_array *array, int prc)
 	int	i;
 
 	i = 0;
-	if (i < array->env.size)
+	while (i < array->env.size)
 	{
 		if (ft_strcmp(array->env.key[i], "PATH"))
 			return (0);
@@ -63,7 +63,7 @@ void	print_env(t_array *array, int prc)
 		return ;
 	if (check_env(array->cmd_group[prc].cmd))
 	{
-		if (check_path(array, prc))
+		if (check_path(array, prc) == 1)
 			return ;
 		if (array->cmd_group[prc].n_arg == 0)
 		{
