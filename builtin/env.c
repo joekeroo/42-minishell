@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 18:33:57 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:03:27 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	int	check_path(t_array *array, int prc)
 			return (0);
 		i++;
 	}
-	print_cmd_error(array, prc, array->cmd_group[prc].cmd);
+	print_cmd_error(array, array->cmd_group[prc].cmd);
 	array->cmd_group[prc].executed = 1;
 	return (1);
 }

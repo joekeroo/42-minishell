@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 16:22:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 15:17:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:26:27 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,20 @@ static	int	mul_args(t_array *array, int prc)
 	return (0);
 }
 
-void	exit_minishell(t_array *array, int prc)
+int	exit_minishell(t_array *array, int prc)
 {
 	if (array->cmd_group[prc].cmd)
 	{
 		if (ft_strcmp(array->cmd_group[prc].cmd, "exit"))
 		{
+			if (array->n_cmdln > 1)
+				return (1);
 			if (mul_args(array, prc))
-				return ;
+				return (1);
 			else
 				exit_prog(array, prc);
-			array->cmd_group[prc].executed = 1;
+			return (1);
 		}
 	}
+	return (0);
 }

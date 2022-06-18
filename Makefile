@@ -16,7 +16,8 @@ BLTIN = builtin/echo.c builtin/builtin.c builtin/export.c builtin/export_utils.c
 
 UTILS = utilities/print_utils.c utilities/free_utils.c utilities/get_next_line.c
 
-EXECS = executor/executor.c executor/executor_utils.c executor/pipex.c
+EXECS = executor/executor.c executor/executor_utils.c executor/pipex.c \
+		executor/pipex_utils.c
 
 PARSER = parser/parser.c parser/lexer.c parser/lexer_utils.c parser/init_cmdgrp.c \
 		 parser/redirection.c parser/command.c parser/expansion.c parser/expansion_size.c \

@@ -6,44 +6,43 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:36:50 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 17:13:35 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:47:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	mulwaitpid(t_array *array)
+static	void	startprocess(t_array *array, int i, int *fd)
 {
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < array->n_cmdln)
-		waitpid(array->process[i++], &status, 0);
-}
-
-static	void	midprocess(t_array *array, int prc, int lastfd, int *fd)
-{
-	dup2(lastfd, array->cmd_group[prc].files.curr_stdin);
-	close(lastfd);
-	dup2(fd[1], array->cmd_group[prc].files.curr_stdout);
+	dup2(fd[1], 1);
 	close(fd[1]);
-	builtin(array, prc);
+	close(fd[0]);
+	builtin(array, i);
 	exit(array->exitstat);
 }
 
-static	void	closefds(int *lastfd, int *fd)
+static	void	midprocess(t_array *array, int i, int lastfd, int *fd)
 {
-	close(*lastfd);
+	dup2(lastfd, 0);
+	close(lastfd);
+	dup2(fd[1], 1);
 	close(fd[1]);
-	*lastfd = fd[0];
+	builtin(array, i);
+	exit(array->exitstat);
 }
 
-void	pipex(t_array *array)
+static	void	endprocess(t_array *array, int i, int lastfd)
+{
+	dup2(lastfd, 0);
+	close(lastfd);
+	builtin(array, i);
+	exit(array->exitstat);
+}
+
+static	void	run_pipex(t_array *array, int *fd)
 {
 	int		i;
 	int		lastfd;
-	int		fd[2];
 
 	i = 0;
 	lastfd = 0;
@@ -55,9 +54,26 @@ void	pipex(t_array *array)
 		if (array->process[i] < 0)
 			return (perror("Fork Error"));
 		if (array->process[i] == 0)
-			midprocess(array, i, lastfd, fd);
-		closefds(&lastfd, fd);
-		i++;
+		{
+			if (i == 0)
+				startprocess(array, i, fd);
+			else if (i == array->n_cmdln - 1)
+				endprocess(array, i, lastfd);
+			else
+				midprocess(array, i, lastfd, fd);
+		}
+		closefds(&lastfd, fd, i++, array->n_cmdln);
 	}
 	mulwaitpid(array);
+}
+
+void	pipex(t_array *array)
+{
+	int		fd[2];
+
+	if (exit_minishell(array, 0))
+		return ;
+	array->process = malloc(sizeof(int) * array->n_cmdln);
+	run_pipex(array, fd);
+	free(array->process);
 }

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 18:00:42 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:34:35 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	print_redir(t_array *array, int i);
 // builtin functions
 int		checkfiles(t_array *array, int prc);
 int		redir_file(t_array *array, int prc);
+int		exit_minishell(t_array *array, int prc);
 void	echo(t_array *array, int prc);
 void	cd_path(t_array *array, int prc);
 void	print_pwd(t_array *array, int prc);
@@ -149,7 +150,6 @@ void	init_env(t_array *array, char **envp);
 void	remove_key_value(t_array *array, char *key);
 void	add_env(t_array *array, char *str);
 void	add_key_value(t_array *array, char *key, char *value);
-void	exit_minishell(t_array *array, int prc);
 char	*get_env_value(t_array *array, char *str);
 
 // executor functions
@@ -157,7 +157,9 @@ char	*re_path(char *str1, char *str2);
 char	**get_path(t_array *array, int prc);
 char	**get_arguments(t_array *array, int prc);
 void	pipex(t_array *array);
+void	mulwaitpid(t_array *array);
 void	fork_exec(t_array *array, int prc);
-void	print_cmd_error(t_array *array, int prc, char *cmd);
+void	print_cmd_error(t_array *array, char *cmd);
+void	closefds(int *lastfd, int *fd, int i, int size);
 
 #endif

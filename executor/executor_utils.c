@@ -6,23 +6,25 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 15:43:42 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:08:07 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_cmd_error(t_array *array, int prc, char *cmd)
+void	print_cmd_error(t_array *array, char *cmd)
 {
-	int	temp;
+	char	*res;
+	char	*temp1;
+	char	*temp2;
 
-	check_dup(array, prc);
-	temp = dup(1);
-	dup2(2, temp);
-	close(2);
-	printf("minishell: %s: command not found\n", cmd);
-	dup2(temp, 1);
-	close(temp);
+	temp1 = ft_strjoin("minishell: ", cmd);
+	temp2 = ft_strdup(": command not found\n");
+	res = ft_strjoin(temp1, temp2);
+	ft_putstr_fd(res, 2);
+	free(temp1);
+	free(temp2);
+	free(res);
 	array->exitstat = 127;
 }
 
@@ -36,7 +38,7 @@ char	**get_path(t_array *array, int prc)
 	path = get_env_value(array, "PATH");
 	if (!path)
 	{
-		print_cmd_error(array, prc, array->cmd_group[prc].cmd);
+		print_cmd_error(array, array->cmd_group[prc].cmd);
 		return (NULL);
 	}
 	temp = ft_split(path, ':');

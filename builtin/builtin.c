@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:34:15 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 17:23:11 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:18:09 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	builtin(t_array *array, int prc)
 	print_env(array, prc);
 	export_env(array, prc);
 	unset_env(array, prc);
-	exit_minishell(array, prc);
 	if (array->cmd_group[prc].executed == 0)
 		fork_exec(array, prc);
 	check_dup(array, prc);

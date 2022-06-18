@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:08:12 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 18:36:03 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:29:00 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	parser(t_array *array)
 	check_files(array);
 	check_cmd(array);
 	check_args(array);
-	array->process = malloc(sizeof(int) * array->n_cmdln);
 }

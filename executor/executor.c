@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:02:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 18:31:09 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 20:03:40 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	void	executor(t_array *array, int prc)
 	size = run_exec(array, paths, args, array->cmd_group[prc].n_arg + 1);
 	free_array(paths, size);
 	free_array(args, array->cmd_group[prc].n_arg + 1);
-	print_cmd_error(array, prc, array->cmd_group[prc].cmd);
+	print_cmd_error(array, array->cmd_group[prc].cmd);
 }
 
 void	fork_exec(t_array *array, int prc)
