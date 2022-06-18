@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 16:22:58 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 18:33:57 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,32 @@ static	void	print_error(t_array *array, int prc)
 		array->cmd_group[prc].args[0]);
 }
 
-int	print_env(t_array *array, int prc)
+static	int	check_path(t_array *array, int prc)
+{
+	int	i;
+
+	i = 0;
+	if (i < array->env.size)
+	{
+		if (ft_strcmp(array->env.key[i], "PATH"))
+			return (0);
+		i++;
+	}
+	print_cmd_error(array, prc, array->cmd_group[prc].cmd);
+	array->cmd_group[prc].executed = 1;
+	return (1);
+}
+
+void	print_env(t_array *array, int prc)
 {
 	int	j;
 
 	if (!array->cmd_group[prc].cmd)
-		return (0);
+		return ;
 	if (check_env(array->cmd_group[prc].cmd))
 	{
+		if (check_path(array, prc))
+			return ;
 		if (array->cmd_group[prc].n_arg == 0)
 		{
 			j = 0;
@@ -62,7 +80,6 @@ int	print_env(t_array *array, int prc)
 		}
 		else
 			print_error(array, prc);
-		return (1);
+		array->cmd_group[prc].executed = 1;
 	}
-	return (0);
 }

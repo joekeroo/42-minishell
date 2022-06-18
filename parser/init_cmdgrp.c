@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:34:36 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 14:45:09 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 14:50:09 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static	void	init_array(t_array *array)
 				* array->cmd_group[i].size);
 		array->cmd_group[i].type = malloc(sizeof(int)
 				* array->cmd_group[i].size);
+		array->cmd_group[i].executed = 0;
 		i++;
 	}
 }

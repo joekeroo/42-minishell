@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 16:18:34 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 18:00:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_group
 {
 	int		size;
 	int		n_arg;
+	int		executed;
 	int		*type;
 	char	*cmd;
 	char	*heredoc;
@@ -82,14 +83,15 @@ typedef struct s_array
 	int		size;
 	int		n_cmdln;
 	int		exitstat;
-	int		toggle_info;
 	int		cd_count;
+	int		toggle_info;
 	char	*pwd;
 	char	*old_pwd;
 	char	*temp;
 	char	*line;
-	char	**en_var;
 	char	**token;
+	char	**en_var;
+	int		*process;
 	t_env	env;
 	t_group	*cmd_group;
 }	t_array;
@@ -134,14 +136,15 @@ void	print_redir(t_array *array, int i);
 // builtin functions
 int		checkfiles(t_array *array, int prc);
 int		redir_file(t_array *array, int prc);
-int		echo(t_array *array, int prc);
-int		cd_path(t_array *array, int prc);
-int		print_pwd(t_array *array, int prc);
-int		print_env(t_array *array, int prc);
-int		unset_env(t_array *array, int prc);
-int		export_env(t_array *array, int prc);
+void	echo(t_array *array, int prc);
+void	cd_path(t_array *array, int prc);
+void	print_pwd(t_array *array, int prc);
+void	print_env(t_array *array, int prc);
+void	unset_env(t_array *array, int prc);
+void	export_env(t_array *array, int prc);
 void	save_heredoc(t_array *array, int prc);
 void	builtin(t_array *array, int prc);
+void	check_dup(t_array *array, int prc);
 void	init_env(t_array *array, char **envp);
 void	remove_key_value(t_array *array, char *key);
 void	add_env(t_array *array, char *str);
@@ -150,10 +153,11 @@ void	exit_minishell(t_array *array, int prc);
 char	*get_env_value(t_array *array, char *str);
 
 // executor functions
-void	print_cmd_error(t_array *array, char *cmd);
-void	run_exec(t_array *array, int prc);
 char	*re_path(char *str1, char *str2);
-char	**get_arguments(t_array *array, int prc);
 char	**get_path(t_array *array, int prc);
+char	**get_arguments(t_array *array, int prc);
+void	pipex(t_array *array);
+void	fork_exec(t_array *array, int prc);
+void	print_cmd_error(t_array *array, int prc, char *cmd);
 
 #endif

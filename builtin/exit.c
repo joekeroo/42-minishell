@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 16:22:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/10 15:16:19 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 15:17:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	exit_minishell(t_array *array, int prc)
 				return ;
 			else
 				exit_prog(array, prc);
+			array->cmd_group[prc].executed = 1;
 		}
 	}
 }

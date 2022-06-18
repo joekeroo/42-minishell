@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:19:46 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 16:22:32 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 15:11:06 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ static	int	check_pwd(char *str)
 	return (1);
 }
 
-int	print_pwd(t_array *array, int prc)
+void	print_pwd(t_array *array, int prc)
 {
 	if (!array->cmd_group[prc].cmd)
-		return (0);
+		return ;
 	if (check_pwd(array->cmd_group[prc].cmd))
 	{
 		array->exitstat = 0;
 		if (array->pwd)
 			printf("%s\n", array->pwd);
-		return (1);
+		array->cmd_group[prc].executed = 1;
 	}
-	return (0);
 }

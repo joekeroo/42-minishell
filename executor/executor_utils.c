@@ -6,16 +6,17 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 16:04:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 15:43:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_cmd_error(t_array *array, char *cmd)
+void	print_cmd_error(t_array *array, int prc, char *cmd)
 {
 	int	temp;
 
+	check_dup(array, prc);
 	temp = dup(1);
 	dup2(2, temp);
 	close(2);
@@ -35,7 +36,7 @@ char	**get_path(t_array *array, int prc)
 	path = get_env_value(array, "PATH");
 	if (!path)
 	{
-		print_cmd_error(array, array->cmd_group[prc].cmd);
+		print_cmd_error(array, prc, array->cmd_group[prc].cmd);
 		return (NULL);
 	}
 	temp = ft_split(path, ':');

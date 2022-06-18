@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:05:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 16:21:07 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 15:11:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	int	check_echo(char *str)
 	return (1);
 }
 
-int	echo(t_array *array, int prc)
+void	echo(t_array *array, int prc)
 {
 	int	i;
 	int	nl;
@@ -57,7 +57,7 @@ int	echo(t_array *array, int prc)
 	nl = 1;
 	start = 0;
 	if (!array->cmd_group[prc].cmd)
-		return (0);
+		return ;
 	if (check_echo(array->cmd_group[prc].cmd))
 	{
 		array->exitstat = 0;
@@ -72,7 +72,6 @@ int	echo(t_array *array, int prc)
 		}
 		if (nl == 1)
 			printf("\n");
-		return (1);
+		array->cmd_group[prc].executed = 1;
 	}
-	return (0);
 }
