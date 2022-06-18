@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:34:35 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 21:23:33 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_array
 	int		cd_count;
 	int		toggle_info;
 	char	*pwd;
+	char	*home;
 	char	*old_pwd;
 	char	*temp;
 	char	*line;

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:18:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 21:24:55 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static	void	free_minishell(t_array *array)
 		free(array->pwd);
 	if (array->old_pwd)
 		free(array->old_pwd);
+	if (array->home)
+		free(array->home);
 	free_array(array->env.key, array->env.size);
 	free_array(array->env.value, array->env.size);
 }

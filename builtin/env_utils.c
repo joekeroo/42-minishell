@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:50:00 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/17 15:39:01 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/18 21:24:23 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	init_env(t_array *array, char **envp)
 		value = extr_env(envp[i], 2);
 		if (ft_strcmp(key, "PWD"))
 			array->pwd = ft_strdup(value);
+		if (ft_strcmp(key, "HOME"))
+			array->home = ft_strdup(value);
 		array->env.key[i] = ft_strdup(key);
 		array->env.value[i++] = ft_strdup(value);
 		free(key);
