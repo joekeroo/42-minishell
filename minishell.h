@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 15:05:24 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 20:08:19 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_files
 {
 	int	infile;
 	int	outfile;
+	int	dup_in;
+	int	dup_out;
 	int	in_status;
 	int	out_status;
 	int	curr_stdin;
@@ -81,6 +83,7 @@ typedef struct s_array
 	int		i;
 	int		exit;
 	int		size;
+	int		fd[2];
 	int		n_cmdln;
 	int		exitstat;
 	int		cd_count;
@@ -161,6 +164,6 @@ void	pipex(t_array *array);
 void	mulwaitpid(t_array *array);
 void	fork_exec(t_array *array, int prc);
 void	print_cmd_error(t_array *array, char *cmd);
-void	closefds(int *lastfd, int *fd, int i, int size);
+void	closefds(t_array *array, int *lastfd, int i, int size);
 
 #endif

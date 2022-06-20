@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:34:15 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:18:09 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 15:40:12 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	check_dup(t_array *array, int prc)
 
 void	builtin(t_array *array, int prc)
 {
-	if (redir_file(array, prc) < 0)
-		return ;
 	echo(array, prc);
 	cd_path(array, prc);
 	print_pwd(array, prc);

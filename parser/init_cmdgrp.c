@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:34:36 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 15:09:39 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 19:56:41 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	init_cmdgrp(t_array *array)
 	{
 		array->cmd_group[i].files.in_status = 0;
 		array->cmd_group[i].files.out_status = 0;
-		array->cmd_group[i].files.curr_stdin = dup(0);
-		array->cmd_group[i].files.curr_stdout = dup(1);
 		array->cmd_group[i].heredoc = "\0";
+		array->cmd_group[i].files.dup_in = 0;
+		array->cmd_group[i].files.dup_out = 0;
 		j = dup_token(array, i, j);
 		i++;
 	}
