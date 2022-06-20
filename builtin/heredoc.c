@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:05:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 15:03:23 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 15:06:44 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static	int	check_conditions(t_array *array, char *needle, char **stk, int sz)
 	}
 }
 
-static	void	here_doc(t_array *array, char **temp, int size)
+static	void	here_doc(t_array *array, int prc, char **temp, int size)
 {
 	char	*temp1;
 	char	*temp2;
@@ -54,12 +54,12 @@ static	void	here_doc(t_array *array, char **temp, int size)
 	{
 		ft_putstr_fd("> ", 1);
 		temp1 = get_next_line(0);
-		temp2 = ft_strdup(array->heredoc);
+		temp2 = ft_strdup(array->cmd_group[prc].heredoc);
 		if (check_conditions(array, temp1, temp, size) == 1)
 		{
-			if (array->heredoc[0] != '\0')
-				free(array->heredoc);
-			array->heredoc = ft_strjoin(temp2, temp1);
+			if (array->cmd_group[prc].heredoc[0] != '\0')
+				free(array->cmd_group[prc].heredoc);
+			array->cmd_group[prc].heredoc = ft_strjoin(temp2, temp1);
 		}
 		else if (check_conditions(array, temp1, temp, size) == 2)
 		{
@@ -105,6 +105,6 @@ void	save_heredoc(t_array *array, int prc)
 		return ;
 	temp = malloc(sizeof(char *) * size);
 	get_heredoc(array, temp, prc, &j);
-	here_doc(array, temp, size);
+	here_doc(array, prc, temp, size);
 	free_array(temp, size);
 }

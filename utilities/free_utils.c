@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:07:24 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 13:45:20 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 15:09:07 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_array(char **array, int size)
 
 static	void	free_extra_cmdgrp(t_array *array, int i)
 {
+	if (array->cmd_group[i].heredoc[0] != '\0')
+		free(array->cmd_group[i].heredoc);
 	if (array->cmd_group[i].type)
 		free(array->cmd_group[i].type);
 	if (array->cmd_group[i].redir.infile)

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 15:03:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 15:05:24 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_group
 	int		executed;
 	int		*type;
 	char	*cmd;
+	char	*heredoc;
 	char	**args;
 	char	**token;
 	t_files	files;
@@ -90,7 +91,6 @@ typedef struct s_array
 	char	*old_pwd;
 	char	*temp;
 	char	*line;
-	char	*heredoc;
 	char	**token;
 	char	**en_var;
 	t_env	env;
