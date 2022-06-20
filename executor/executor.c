@@ -6,28 +6,23 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:02:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:03:40 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 14:45:14 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	int	run_exec(t_array *array, char **paths, char **args, int size)
+static	int	run_exec(t_array *array, char **paths, char **args)
 {
 	int		i;
-	int		j;
 	char	*new_path;
 
 	i = 0;
 	while (paths[i])
 	{
-		j = 0;
-		while (j < size)
-		{
-			new_path = re_path(paths[i], args[j++]);
-			execve(new_path, args, array->en_var);
-			free(new_path);
-		}
+		new_path = re_path(paths[i], args[0]);
+		execve(new_path, args, array->en_var);
+		free(new_path);
 		i++;
 	}
 	return (i);
@@ -45,8 +40,7 @@ static	void	executor(t_array *array, int prc)
 	if (!paths)
 		return ;
 	args = get_arguments(array, prc);
-	size = run_exec(array, paths, args, array->cmd_group[prc].n_arg + 1);
-	free_array(paths, size);
+	size = run_exec(array, paths, args);
 	free_array(args, array->cmd_group[prc].n_arg + 1);
 	print_cmd_error(array, array->cmd_group[prc].cmd);
 }

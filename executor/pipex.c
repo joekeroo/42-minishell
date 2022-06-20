@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:36:50 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 21:36:53 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 14:55:32 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ static	void	run_pipex(t_array *array, int *fd)
 
 void	pipex(t_array *array)
 {
-	int		fd[2];
+	int	i;
+	int	fd[2];
 
 	if (exit_minishell(array, 0))
 		return ;
+	i = 0;
+	while (i < array->n_cmdln)
+		save_heredoc(array, i);
 	if (array->n_cmdln > 1)
 	{
 		array->process = malloc(sizeof(int) * array->n_cmdln);

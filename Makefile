@@ -1,7 +1,7 @@
 NAME = minishell
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = #-Wall -Wextra -Werror #-fsanitize=address -g3
 LDFLAGS = -L/usr/include -lreadline
 RM = rm -f
 
@@ -30,7 +30,7 @@ LIBFT = libft/libft.a
 
 all: ${NAME}
 
-${NAME}: ${OBJ} ${LIBFT}
+${NAME}: ${OBJ} ${LIBFT} $(MAIN)
 	@${CC} ${CFLAGS} ${LDFLAGS} -o ${NAME} ${MAIN} ${OBJ} ${LIBFT}
 
 ${LIBFT}:

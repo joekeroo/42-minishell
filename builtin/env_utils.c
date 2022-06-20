@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 11:50:00 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 21:24:23 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 14:42:29 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ static	char	**duplicate_array(char **array, int size)
 	if (!array)
 		return (NULL);
 	i = 0;
-	temp = malloc(sizeof(char *) * size);
+	temp = malloc(sizeof(char *) * (size + 1));
 	while (i < size)
 	{
 		temp[i] = ft_strdup(array[i]);
 		i++;
 	}
+	temp[i] = NULL;
 	return (temp);
 }
 
