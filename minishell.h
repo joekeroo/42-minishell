@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 21:23:33 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 15:03:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_group
 	int		executed;
 	int		*type;
 	char	*cmd;
-	char	*heredoc;
 	char	**args;
 	char	**token;
 	t_files	files;
@@ -85,14 +84,15 @@ typedef struct s_array
 	int		exitstat;
 	int		cd_count;
 	int		toggle_info;
+	int		*process;
 	char	*pwd;
 	char	*home;
 	char	*old_pwd;
 	char	*temp;
 	char	*line;
+	char	*heredoc;
 	char	**token;
 	char	**en_var;
-	int		*process;
 	t_env	env;
 	t_group	*cmd_group;
 }	t_array;

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:09:26 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 14:47:44 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/20 15:01:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	void	in_file(t_array *array, char *filename, int prc, int i)
 			if (type == HEREDOC)
 			{
 				tmp = open("temp", O_CREAT | O_RDWR | O_TRUNC, 0644);
-				ft_putstr_fd(array->cmd_group[prc].heredoc, tmp);
+				ft_putstr_fd(array->heredoc, tmp);
 				close(tmp);
 				array->cmd_group[prc].files.infile = open("temp", O_RDONLY);
 				unlink("temp");
