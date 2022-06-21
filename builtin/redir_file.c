@@ -6,37 +6,51 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:09:26 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 20:32:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/21 21:06:45 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static	char	*create_filename(t_array *array, int prc)
+{
+	char	*tmp;
+	char	*res;
+
+	array->cmd_group[prc].files.in_status = 1;
+	array->cmd_group[prc].files.curr_stdin = dup(0);
+	tmp = malloc(sizeof(char) * 2);
+	tmp[0] = '0' + g_filenumber++;
+	tmp[1] = '\0';
+	res = ft_strjoin("tmp", tmp);
+	free(tmp);
+	return (res);
+}
+
 static	void	in_file(t_array *array, char *filename, int prc, int i)
 {
-	int	tmp;
-	int	type;
+	int		tmp;
+	int		type;
+	char	*temp;
 
 	if (ft_strcmp(filename, array->cmd_group[prc].redir.infile))
 	{
 		type = array->cmd_group[prc].redir.types[i];
 		if (type == INFILE || type == HEREDOC)
 		{
-			array->cmd_group[prc].files.in_status = 1;
-			array->cmd_group[prc].files.curr_stdin = dup(0);
+			temp = create_filename(array, prc);
 			if (type == HEREDOC)
 			{
-				tmp = open("temp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+				array->cmd_group[prc].files.heredoc_status = 1;
+				tmp = open(temp, O_CREAT | O_RDWR | O_TRUNC, 0644);
 				ft_putstr_fd(array->cmd_group[prc].heredoc, tmp);
 				close(tmp);
-				array->cmd_group[prc].files.infile = open("temp", O_RDONLY);
-				unlink("temp");
+				array->cmd_group[prc].files.infile = open(temp, O_RDONLY);
+				unlink(temp);
 			}
 			else if (type == INFILE)
 				array->cmd_group[prc].files.infile = open(filename, O_RDONLY);
-			dup2(array->cmd_group[prc].files.infile, 0);
-			close(array->cmd_group[prc].files.infile);
-			array->cmd_group[prc].files.dup_in = 1;
+			free(temp);
 		}
 	}
 }
@@ -58,9 +72,6 @@ static	void	out_file(t_array *array, char *filename, int prc, int i)
 			else if (type == APPEND)
 				array->cmd_group[prc].files.outfile
 					= open(filename, O_WRONLY | O_APPEND, 0644);
-			dup2(array->cmd_group[prc].files.outfile, 1);
-			close(array->cmd_group[prc].files.outfile);
-			array->cmd_group[prc].files.dup_out = 1;
 		}
 	}
 }
@@ -110,6 +121,7 @@ int	redir_file(t_array *array, int prc)
 			free(filename);
 			i++;
 		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }

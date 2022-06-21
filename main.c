@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:31 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 19:10:35 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/21 19:43:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
+	g_filenumber = 0;
 	minishell(envp);
 	return (0);
 }

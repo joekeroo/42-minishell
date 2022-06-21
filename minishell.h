@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 20:08:19 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/21 21:12:36 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ typedef struct s_files
 {
 	int	infile;
 	int	outfile;
-	int	dup_in;
-	int	dup_out;
 	int	in_status;
 	int	out_status;
+	int	heredoc_status;
 	int	curr_stdin;
 	int	curr_stdout;
 }	t_files;
@@ -100,6 +99,8 @@ typedef struct s_array
 	t_group	*cmd_group;
 }	t_array;
 
+int	g_filenumber;
+
 // minishell functions
 void	minishell(char **envp);
 
@@ -141,6 +142,7 @@ void	print_redir(t_array *array, int i);
 int		checkfiles(t_array *array, int prc);
 int		redir_file(t_array *array, int prc);
 int		exit_minishell(t_array *array, int prc);
+void	change_in_out_fd(t_array *array, int prc, int type);
 void	echo(t_array *array, int prc);
 void	cd_path(t_array *array, int prc);
 void	print_pwd(t_array *array, int prc);
@@ -161,8 +163,9 @@ char	*re_path(char *str1, char *str2);
 char	**get_path(t_array *array, int prc);
 char	**get_arguments(t_array *array, int prc);
 void	pipex(t_array *array);
-void	mulwaitpid(t_array *array);
+void	run_pipex(t_array *array);
 void	fork_exec(t_array *array, int prc);
+void	extra_waitpid(t_array *array, int prc);
 void	print_cmd_error(t_array *array, char *cmd);
 void	closefds(t_array *array, int *lastfd, int i, int size);
 

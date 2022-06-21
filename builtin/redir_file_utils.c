@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:32:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 19:59:49 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/21 14:48:30 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	void	print_file_error(t_array *array, char *filename, int type)
 	free(temp2);
 	free(temp3);
 	free(res);
-	array->exitstat = 127;
+	array->exitstat = 1;
 }
 
 static	int	checkfd1(t_array *array, char *filename)
@@ -98,4 +98,25 @@ int	checkfiles(t_array *array, int prc)
 		i++;
 	}
 	return (1);
+}
+
+// 1 = infile, 2 = outfile, 3 = both
+void	change_in_out_fd(t_array *array, int prc, int type)
+{
+	if (type == 1 || type == 3)
+	{
+		if (array->cmd_group[prc].files.in_status)
+		{
+			dup2(array->cmd_group[prc].files.infile, 0);
+			close(array->cmd_group[prc].files.infile);
+		}
+	}
+	if (type == 2 || type == 3)
+	{
+		if (array->cmd_group[prc].files.out_status)
+		{
+			dup2(array->cmd_group[prc].files.outfile, 1);
+			close(array->cmd_group[prc].files.outfile);
+		}
+	}
 }

@@ -6,97 +6,40 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:36:50 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 20:41:33 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/21 21:26:14 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	startprocess(t_array *array, int i)
+void	extra_waitpid(t_array *array, int prc)
 {
-	if (redir_file(array, i) < 0)
+	int	status;
+
+	redir_file(array, prc);
+	// if (array->cmd_group[prc].files.heredoc_status == 1)
+	waitpid(array->process[prc], &status, 0);
+	array->exitstat = WEXITSTATUS(status);
+}
+
+void	closefds(t_array *array, int *lastfd, int i, int size)
+{
+	if (i == 0)
 	{
 		close(array->fd[1]);
+		*lastfd = array->fd[0];
+	}
+	else if (i == size - 1)
+	{
 		close(array->fd[0]);
-		array->exitstat = 1;
-		exit(array->exitstat);
+		close(*lastfd);
 	}
 	else
 	{
-		if (array->cmd_group[i].files.dup_out == 0)
-			dup2(array->fd[1], 1);
-	}
-	close(array->fd[1]);
-	close(array->fd[0]);
-	builtin(array, i);
-	exit(array->exitstat);
-}
-
-static	void	midprocess(t_array *array, int i, int lastfd)
-{
-	if (redir_file(array, i) < 0)
-	{
-		close(lastfd);
 		close(array->fd[1]);
-		close(array->fd[0]);
-		array->exitstat = 1;
-		exit(array->exitstat);
+		close(*lastfd);
+		*lastfd = array->fd[0];
 	}
-	else
-	{
-		if (array->cmd_group[i].files.dup_out == 0)
-			dup2(array->fd[1], 1);
-	}
-	if (array->cmd_group[i].files.in_status	== 0)
-		dup2(lastfd, 0);
-	close(lastfd);
-	close(array->fd[0]);
-	close(array->fd[1]);
-	builtin(array, i);
-	exit(array->exitstat);
-}
-
-static	void	endprocess(t_array *array, int i, int lastfd)
-{
-	if (redir_file(array, i) < 0)
-	{
-		close(lastfd);
-		array->exitstat = 1;
-		exit(array->exitstat);
-	}
-	if (array->cmd_group[i].files.in_status	== 0)
-		dup2(lastfd, 0);
-	close(lastfd);
-	builtin(array, i);
-	exit(array->exitstat);
-}
-
-static	void	run_pipex(t_array *array)
-{
-	int		i;
-	int		lastfd;
-
-	i = 0;
-	lastfd = 0;
-	while (i < array->n_cmdln)
-	{
-		if (i != array->n_cmdln - 1)
-			pipe(array->fd);
-		array->process[i] = fork();
-		if (array->process[i] < 0)
-			return (perror("Fork Error"));
-		if (array->process[i] == 0)
-		{
-			if (i == 0)
-				startprocess(array, i);
-			else if (i == array->n_cmdln - 1)
-				endprocess(array, i, lastfd);
-			else
-				midprocess(array, i, lastfd);
-		}
-		closefds(array, &lastfd, i++, array->n_cmdln);
-	}
-	mulwaitpid(array);
 }
 
 void	pipex(t_array *array)
@@ -116,7 +59,10 @@ void	pipex(t_array *array)
 	}
 	else
 	{
-		if (redir_file(array, 0))
-			builtin(array, 0);
+		if (redir_file(array, 0) < 0)
+			return ;
+		change_in_out_fd(array, 0, 3);
+		builtin(array, 0);
+		check_dup(array, 0);
 	}
 }

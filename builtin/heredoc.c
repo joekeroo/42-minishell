@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:05:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 15:06:44 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/21 20:31:41 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,6 @@ static	int	heredoc_size(t_array *array, int prc)
 	return (size);
 }
 
-static	int	check_conditions(t_array *array, char *needle, char **stk, int sz)
-{
-	if (array->i == sz - 1)
-	{
-		if (ft_strcmp(needle, stk[array->i]))
-			return (2);
-		else
-			return (1);
-	}
-	else
-	{
-		if (ft_strcmp(needle, stk[array->i]))
-			array->i++;
-		return (0);
-	}
-}
-
 static	void	here_doc(t_array *array, int prc, char **temp, int size)
 {
 	char	*temp1;
@@ -52,23 +35,24 @@ static	void	here_doc(t_array *array, int prc, char **temp, int size)
 
 	while (1)
 	{
-		ft_putstr_fd("> ", 1);
+		ft_putstr_fd("heredoc> ", 1);
 		temp1 = get_next_line(0);
-		temp2 = ft_strdup(array->cmd_group[prc].heredoc);
-		if (check_conditions(array, temp1, temp, size) == 1)
+		if (ft_strcmp(temp1, temp[array->i]))
+			array->i++;
+		else if (array->i == size - 1)
 		{
+			temp2 = ft_strdup(array->cmd_group[prc].heredoc);
 			if (array->cmd_group[prc].heredoc[0] != '\0')
 				free(array->cmd_group[prc].heredoc);
 			array->cmd_group[prc].heredoc = ft_strjoin(temp2, temp1);
+			free(temp2);
 		}
-		else if (check_conditions(array, temp1, temp, size) == 2)
+		if (array->i == size)
 		{
 			free(temp1);
-			free(temp2);
 			break ;
 		}
 		free(temp1);
-		free(temp2);
 	}
 	array->i = 0;
 }
