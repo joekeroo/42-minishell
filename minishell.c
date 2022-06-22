@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 15:09:24 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/22 14:08:55 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ static	void	free_minishell(t_array *array)
 	free_array(array->env.value, array->env.size);
 }
 
+static	int	chckspcs(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (i == ft_strlen(str))
+		return (0);
+	return (1);
+}
+
 void	minishell(char **envp)
 {
 	t_array	array;
@@ -50,7 +62,7 @@ void	minishell(char **envp)
 		if (!array.line)
 			break ;
 		add_history(array.line);
-		if (array.line[0] != '\0' && lexer(&array) > 0)
+		if (chckspcs(array.line) && array.line[0] != '\0' && lexer(&array) > 0)
 		{
 			parser(&array);
 			pipex(&array);

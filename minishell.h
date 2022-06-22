@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 12:48:24 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/22 14:04:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
@@ -33,7 +35,8 @@ enum {
 	HEREDOC = 1,
 	INFILE = 2,
 	TRUNC = 3,
-	APPEND = 4
+	APPEND = 4,
+	PATH_MAX = 4096
 };
 
 typedef struct s_env
@@ -145,6 +148,7 @@ int		exit_minishell(t_array *array, int prc);
 void	change_in_out_fd(t_array *array, int prc, int type);
 void	echo(t_array *array, int prc);
 void	cd_path(t_array *array, int prc);
+void	print_cd_err(t_array *array, char *str, int type);
 void	save_file(t_array *array, int prc);
 void	print_pwd(t_array *array, int prc);
 void	print_env(t_array *array, int prc);
