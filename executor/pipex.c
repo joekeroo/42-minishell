@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 16:36:50 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/21 21:26:14 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/22 12:55:59 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	extra_waitpid(t_array *array, int prc)
 	int	status;
 
 	redir_file(array, prc);
-	// if (array->cmd_group[prc].files.heredoc_status == 1)
-	waitpid(array->process[prc], &status, 0);
+	if (array->cmd_group[prc].files.heredoc_status == 1)
+		waitpid(array->process[prc], &status, 0);
 	array->exitstat = WEXITSTATUS(status);
 }
 
