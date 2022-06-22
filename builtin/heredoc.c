@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:05:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 12:49:30 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/22 18:35:43 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,27 +101,28 @@ static	void	parent_hd(t_array *array, int prc)
 
 void	save_heredoc(t_array *array, int prc)
 {
-	int		j;
 	int		size;
 	int		status;
 	char	**temp;
 	pid_t	process;
 
-	j = 0;
+	array->i = 0;
 	size = heredoc_size(array, prc);
 	if (size == 0)
 		return ;
 	process = fork();
 	if (process == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		temp = malloc(sizeof(char *) * size);
-		get_heredoc(array, temp, prc, &j);
+		get_heredoc(array, temp, prc, &array->i);
 		here_doc(array, prc, temp, size);
 		free_array(temp, size);
 		exit(0);
 	}
 	else
 	{
+		signal(SIGINT, SIG_IGN);
 		waitpid(process, &status, 0);
 		parent_hd(array, prc);
 	}

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 15:32:58 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/22 18:36:54 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <dirent.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
@@ -106,6 +107,7 @@ int	g_filenumber;
 
 // minishell functions
 void	minishell(char **envp);
+void	handle_signals(int signum);
 
 // lexer functions
 int		lexer(t_array *array);

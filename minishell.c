@@ -6,14 +6,25 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 15:17:34 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/22 18:46:00 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	handle_signals(int signum)
+{
+	if (signum == SIGINT)
+	{
+		write(0, "\n", 1);
+		rl_replace_line("", 0);
+	}
+}
+
 static	void	init_minishell(t_array *array, char **envp)
 {
+	struct termios	termios_new;
+
 	array->i = 0;
 	array->exit = 0;
 	array->cd_count = 0;
@@ -25,6 +36,11 @@ static	void	init_minishell(t_array *array, char **envp)
 	array->pwd = NULL;
 	array->old_pwd = NULL;
 	init_env(array, envp);
+	tcgetattr(STDIN_FILENO, &termios_new);
+	termios_new.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &termios_new);
+	tcsetattr(0, 0, &termios_new);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 static	void	free_minishell(t_array *array)
@@ -58,6 +74,7 @@ void	minishell(char **envp)
 	init_minishell(&array, envp);
 	while (1)
 	{
+		signal(SIGINT, handle_signals);
 		array.line = readline("minishell % ");
 		if (!array.line)
 			break ;
