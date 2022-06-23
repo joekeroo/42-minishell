@@ -6,11 +6,25 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 14:01:16 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:22:57 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 17:59:42 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	checkpwd(t_array *array, char *key)
+{
+	int	i;
+
+	i = 0;
+	while (i < array->env.size)
+	{
+		if (ft_strcmp(array->env.key[i], key) == 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	print_cd_err(char *str, int type)
 {

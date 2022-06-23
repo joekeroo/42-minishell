@@ -6,24 +6,25 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:31:32 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:23:31 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 18:00:39 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	int	checkpwd(t_array *array, char *key)
+static	void	add_path(t_array *array)
 {
-	int	i;
+	char	*temp1;
+	char	*temp2;
 
-	i = 0;
-	while (i < array->env.size)
-	{
-		if (ft_strcmp(array->env.key[i], key) == 1)
-			return (1);
-		i++;
-	}
-	return (0);
+	temp1 = ft_strjoin("PWD=", array->pwd);
+	temp2 = ft_strjoin("OLDPWD=", array->old_pwd);
+	if (checkpwd(array, "PWD"))
+		add_env(array, temp1);
+	if (checkpwd(array, "OLDPWD"))
+		add_env(array, temp2);
+	free(temp1);
+	free(temp2);
 }
 
 static	void	cd_env(t_array *array, char *dir)
@@ -91,8 +92,6 @@ static	void	run_cd(t_array *array, int prc)
 // update array->pwd && array->old_pwd && env
 void	cd_path(t_array *array, int prc)
 {
-	char	*temp1;
-	char	*temp2;
 	char	cwd[PATH_MAX];
 
 	if (!array->cmd_group[prc].cmd)
@@ -107,12 +106,7 @@ void	cd_path(t_array *array, int prc)
 		if (array->pwd)
 			free(array->pwd);
 		array->pwd = ft_strdup(getcwd(cwd, sizeof(cwd)));
-		temp1 = ft_strjoin("PWD=", array->pwd);
-		temp2 = ft_strjoin("OLDPWD=", array->old_pwd);
-		add_env(array, temp1);
-		add_env(array, temp2);
-		free(temp1);
-		free(temp2);
+		add_path(array);
 		array->cmd_group[prc].executed = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:05:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:18:39 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 17:30:36 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static	int	check_nl(char *str)
 	i = 0;
 	if (str[i] == '-')
 		i++;
+	else
+		return (0);
 	while (str[i] == 'n')
 		i++;
 	if (i == 1 || i < ft_strlen(str))

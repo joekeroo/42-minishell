@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 15:02:31 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 17:54:59 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ void	minishell(char **envp)
 			break ;
 	}
 	free_minishell(&array);
+	system("leaks minishell");
 	exit(g_exitstat);
 }
