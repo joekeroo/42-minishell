@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:02:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:24:46 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 14:06:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	int	run_exec(t_array *array, char **paths, char **args)
 	char	*new_path;
 
 	i = 0;
+	execve(args[0], args, array->en_var);
 	while (paths[i])
 	{
 		new_path = re_path(paths[i], args[0]);

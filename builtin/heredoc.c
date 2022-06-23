@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:05:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:35:30 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:59:43 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ void	save_heredoc(t_array *array, int prc)
 	}
 	else
 	{
-		signal(SIGINT, SIG_IGN);
 		waitpid(process, &status, 0);
+		signal(SIGINT, SIG_IGN);
 		parent_hd(array, prc);
 	}
 }
