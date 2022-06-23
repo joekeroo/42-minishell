@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:24:22 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 14:33:40 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	print_cmd_error(char *cmd)
 	char	*temp1;
 	char	*temp2;
 
+	if (ft_strcmp(cmd, "exit"))
+	{
+		g_exitstat = 0;
+		return ;
+	}
 	temp1 = ft_strjoin("minishell: ", cmd);
 	temp2 = ft_strdup(": command not found\n");
 	res = ft_strjoin(temp1, temp2);
