@@ -6,22 +6,11 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:19:05 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 15:02:31 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	handle_signals(int signum)
-{
-	if (signum == SIGINT)
-	{
-		g_exitstat = 1;
-		write(0, "\n", 1);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
 
 static	void	init_minishell(t_array *array, char **envp)
 {
@@ -69,6 +58,15 @@ static	int	chckspcs(char *str)
 	return (1);
 }
 
+static	void	check_child(void)
+{
+	int	status;
+
+	while (waitpid(-1, &status, 0) > 0)
+		;
+}
+
+// system("leaks minishell");
 void	minishell(char **envp)
 {
 	t_array	array;
@@ -89,10 +87,10 @@ void	minishell(char **envp)
 			free_array(array.token, array.size);
 		}
 		free(array.line);
+		check_child();
 		if (array.exit == 1)
 			break ;
 	}
 	free_minishell(&array);
-	system("leaks minishell");
 	exit(g_exitstat);
 }
