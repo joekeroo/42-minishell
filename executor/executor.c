@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:02:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/20 14:45:14 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:24:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	executor(t_array *array, int prc)
 	args = get_arguments(array, prc);
 	size = run_exec(array, paths, args);
 	free_array(args, array->cmd_group[prc].n_arg + 1);
-	print_cmd_error(array, array->cmd_group[prc].cmd);
+	print_cmd_error(array->cmd_group[prc].cmd);
 }
 
 void	fork_exec(t_array *array, int prc)
@@ -63,10 +63,10 @@ void	fork_exec(t_array *array, int prc)
 		close(fd[1]);
 		close(fd[0]);
 		executor(array, prc);
-		exit(array->exitstat);
+		exit(g_exitstat);
 	}
 	waitpid(process, &status, 0);
-	array->exitstat = WEXITSTATUS(status);
+	g_exitstat = WEXITSTATUS(status);
 	dup2(outfd, 1);
 	close(outfd);
 	close(fd[0]);

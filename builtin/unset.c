@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:52:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 15:11:02 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:22:51 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static	int	find_env(t_array *array, char *str)
 	return (0);
 }
 
-static	void	check_exitstat(t_array *array, int check)
+static	void	check_exitstat(int check)
 {
 	if (check == 1)
-		array->exitstat = 1;
+		g_exitstat = 1;
 	else
-		array->exitstat = 0;
+		g_exitstat = 0;
 }
 
 static	void	error_check(t_array *array, int prc)
@@ -56,7 +56,7 @@ static	void	error_check(t_array *array, int prc)
 		}
 		i++;
 	}
-	check_exitstat(array, check);
+	check_exitstat(check);
 }
 
 void	unset_env(t_array *array, int prc)

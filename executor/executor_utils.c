@@ -6,13 +6,13 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:08:07 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:24:22 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_cmd_error(t_array *array, char *cmd)
+void	print_cmd_error(char *cmd)
 {
 	char	*res;
 	char	*temp1;
@@ -25,7 +25,7 @@ void	print_cmd_error(t_array *array, char *cmd)
 	free(temp1);
 	free(temp2);
 	free(res);
-	array->exitstat = 127;
+	g_exitstat = 127;
 }
 
 char	**get_path(t_array *array, int prc)
@@ -38,7 +38,7 @@ char	**get_path(t_array *array, int prc)
 	path = get_env_value(array, "PATH");
 	if (!path)
 	{
-		print_cmd_error(array, array->cmd_group[prc].cmd);
+		print_cmd_error(array->cmd_group[prc].cmd);
 		return (NULL);
 	}
 	temp = ft_split(path, ':');

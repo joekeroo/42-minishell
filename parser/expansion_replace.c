@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:45:01 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/10 16:06:02 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:16:18 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	void	my_env(t_array *array, char *env, int *j)
 		if (ft_strcmp(array->env.key[k], env))
 			temp = ft_strdup(array->env.value[k]);
 		else if (env[0] == '?')
-			temp = ft_itoa(array->exitstat);
+			temp = ft_itoa(g_exitstat);
 		if (temp)
 		{
 			while (temp[i])

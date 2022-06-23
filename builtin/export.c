@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:38:09 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 15:11:09 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:18:12 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static	void	print_export(t_array *array)
 			print_line(array, i);
 		i++;
 	}
-	array->exitstat = 0;
+	g_exitstat = 0;
 }
 
 static	void	error_check(t_array *array, int curr)
@@ -65,9 +65,9 @@ static	void	error_check(t_array *array, int curr)
 		i++;
 	}
 	if (check == 1)
-		array->exitstat = 1;
+		g_exitstat = 1;
 	else
-		array->exitstat = 0;
+		g_exitstat = 0;
 }
 
 void	export_env(t_array *array, int prc)

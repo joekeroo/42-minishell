@@ -1,12 +1,8 @@
 NAME = minishell
 
-# -I/usr/local/Cellar/readline/8.1.2/include
-# -L/usr/local/Cellar/readline/8.1.2/lib
-
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
-INCLUDE = -I/usr/local/Cellar/readline/8.1.2/include/readline
-LDFLAGS = -lreadline -L/usr/local/Cellar/readline/8.1.2/lib
+CFLAGS = -Wall -Wextra -Werror -I/usr/local/opt/readline/include #-fsanitize=address -g3
+LDFLAGS = -L/usr/include -L/usr/local/opt/readline/lib -lreadline
 RM = rm -f
 
 MAIN = main.c
@@ -36,7 +32,7 @@ LIBFT = libft/libft.a
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${LIBFT} $(MAIN)
-	@${CC} ${CFLAGS} ${INCLUDE} -o ${NAME} ${MAIN} ${OBJ} ${LIBFT} ${LDFLAGS}
+	@${CC} ${CFLAGS} -o ${NAME} ${MAIN} ${OBJ} ${LIBFT} ${LDFLAGS}
 
 ${LIBFT}:
 	@make re -C ${LIBFT_PATH}

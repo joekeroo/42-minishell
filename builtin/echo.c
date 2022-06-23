@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:05:04 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 15:11:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:18:39 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	echo(t_array *array, int prc)
 		return ;
 	if (check_echo(array->cmd_group[prc].cmd))
 	{
-		array->exitstat = 0;
+		g_exitstat = 0;
 		while (i < array->cmd_group[prc].n_arg)
 		{
 			if (check_nl(array->cmd_group[prc].args[i]) && start == 0)

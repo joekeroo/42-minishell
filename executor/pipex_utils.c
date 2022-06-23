@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:47:58 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/21 21:20:05 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:17:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	void	startprocess(t_array *array, int i)
 		close(array->fd[0]);
 		builtin(array, i);
 	}
-	exit(array->exitstat);
+	exit(g_exitstat);
 }
 
 static	void	extra_midprc(t_array *array, int prc, int *lastfd)
@@ -54,6 +54,7 @@ static	void	extra_midprc(t_array *array, int prc, int *lastfd)
 	close(*lastfd);
 	close(array->fd[1]);
 	close(array->fd[0]);
+	close(array->cmd_group[prc].files.infile);
 	builtin(array, prc);
 }
 
@@ -67,7 +68,7 @@ static	void	midprocess(t_array *array, int i, int lastfd)
 		close(lastfd);
 		close(array->fd[1]);
 		close(array->fd[0]);
-		exit(array->exitstat);
+		exit(g_exitstat);
 	}
 	else if (stat == 0)
 	{
@@ -80,7 +81,7 @@ static	void	midprocess(t_array *array, int i, int lastfd)
 	}
 	else
 		extra_midprc(array, i, &lastfd);
-	exit(array->exitstat);
+	exit(g_exitstat);
 }
 
 static	void	endprocess(t_array *array, int i, int lastfd)
@@ -104,9 +105,10 @@ static	void	endprocess(t_array *array, int i, int lastfd)
 			dup2(lastfd, 0);
 		change_in_out_fd(array, i, 2);
 		close(lastfd);
+		close(array->cmd_group[i].files.infile);
 		builtin(array, i);
 	}
-	exit(array->exitstat);
+	exit(g_exitstat);
 }
 
 void	run_pipex(t_array *array)

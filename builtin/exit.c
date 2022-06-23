@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 16:22:03 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/18 20:26:27 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:18:24 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static	void	exit_prog(t_array *array, int prc)
 	{
 		array->exit = 1;
 		printf("exit\n");
-		array->exitstat = ft_atoi(array->cmd_group[prc].args[0]) % 256;
+		g_exitstat = ft_atoi(array->cmd_group[prc].args[0]) % 256;
 	}
 	else
 	{
 		array->exit = 1;
-		array->exitstat = 255;
+		g_exitstat = 255;
 		printf("exit\nminishell: exit: %s: numeric argument required\n",
 			array->cmd_group[prc].args[0]);
 	}
@@ -63,7 +63,7 @@ static	int	mul_args(t_array *array, int prc)
 	{
 		if (is_number(array->cmd_group[prc].args[0]))
 		{
-			array->exitstat = 1;
+			g_exitstat = 1;
 			printf("exit\nminishell: exit: too many arguments\n");
 		}
 		else

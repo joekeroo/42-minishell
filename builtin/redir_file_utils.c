@@ -6,13 +6,13 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:32:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/21 14:48:30 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:22:55 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	void	print_file_error(t_array *array, char *filename, int type)
+static	void	print_file_error(char *filename, int type)
 {
 	char	*res;
 	char	*temp1;
@@ -36,31 +36,31 @@ static	void	print_file_error(t_array *array, char *filename, int type)
 	free(temp2);
 	free(temp3);
 	free(res);
-	array->exitstat = 1;
+	g_exitstat = 1;
 }
 
-static	int	checkfd1(t_array *array, char *filename)
+static	int	checkfd1(char *filename)
 {
 	int	fd;
 
 	fd = -1;
 	if (access(filename, F_OK) < 0)
-		print_file_error(array, filename, 1);
+		print_file_error(filename, 1);
 	else if (access(filename, R_OK) < 0)
-		print_file_error(array, filename, 2);
+		print_file_error(filename, 2);
 	else
 		fd = 1;
 	return (fd);
 }
 
 // type[1] = infile, type[2] = outfile
-static	int	checkfd(t_array *array, char *filename, int type)
+static	int	checkfd(char *filename, int type)
 {
 	int	fd;
 
 	fd = -1;
 	if (type == 1)
-		fd = checkfd1(array, filename);
+		fd = checkfd1(filename);
 	else
 	{
 		if (access(filename, F_OK) < 0)
@@ -70,7 +70,7 @@ static	int	checkfd(t_array *array, char *filename, int type)
 			fd = 1;
 		}
 		else if (access(filename, W_OK) < 0)
-			print_file_error(array, filename, 2);
+			print_file_error(filename, 2);
 		else
 			fd = 1;
 	}
@@ -86,13 +86,13 @@ int	checkfiles(t_array *array, int prc)
 	{
 		if (array->cmd_group[prc].redir.types[i] == INFILE)
 		{
-			if (checkfd(array, array->cmd_group[prc].redir.files[i], 1) < 0)
+			if (checkfd(array->cmd_group[prc].redir.files[i], 1) < 0)
 				return (-1);
 		}
 		else if (array->cmd_group[prc].redir.types[i] == TRUNC
 			|| array->cmd_group[prc].redir.types[i] == APPEND)
 		{
-			if (checkfd(array, array->cmd_group[prc].redir.files[i], 2) < 0)
+			if (checkfd(array->cmd_group[prc].redir.files[i], 2) < 0)
 				return (-1);
 		}
 		i++;

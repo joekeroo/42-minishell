@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:09:26 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 11:22:24 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:09:45 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*create_filename(t_array *array, int prc)
 	array->cmd_group[prc].files.in_status = 1;
 	array->cmd_group[prc].files.curr_stdin = dup(0);
 	tmp = malloc(sizeof(char) * 2);
-	tmp[0] = '0' + g_filenumber++;
+	tmp[0] = '0' + array->filenumber++;
 	tmp[1] = '\0';
 	res = ft_strjoin("tmp", tmp);
 	free(tmp);

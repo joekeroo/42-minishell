@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:05:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 18:35:43 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:35:30 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,21 @@ static	void	here_doc(t_array *array, int prc, char **temp, int size)
 	}
 }
 
-static	void	get_heredoc(t_array *array, char **temp, int prc, int *j)
+static	void	get_heredoc(t_array *array, char **temp, int prc)
 {
 	int		i;
+	int		j;
 	char	*tmp;
 
 	i = 0;
+	j = 0;
 	while (i < array->cmd_group[prc].redir.size)
 	{
 		tmp = NULL;
 		if (array->cmd_group[prc].redir.types[i] == HEREDOC)
 		{
 			tmp = ft_strdup(array->cmd_group[prc].redir.files[i]);
-			temp[*j] = ft_strjoin(tmp, "\n");
-			*j = *j + 1;
+			temp[j++] = ft_strjoin(tmp, "\n");
 			free(tmp);
 		}
 		i++;
@@ -96,6 +97,7 @@ static	void	parent_hd(t_array *array, int prc)
 		free(temp2);
 		free(temp1);
 	}
+	close(fd);
 	unlink("heredoc");
 }
 
@@ -115,7 +117,7 @@ void	save_heredoc(t_array *array, int prc)
 	{
 		signal(SIGINT, SIG_DFL);
 		temp = malloc(sizeof(char *) * size);
-		get_heredoc(array, temp, prc, &array->i);
+		get_heredoc(array, temp, prc);
 		here_doc(array, prc, temp, size);
 		free_array(temp, size);
 		exit(0);

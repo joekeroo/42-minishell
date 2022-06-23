@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:34 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 18:46:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:19:05 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	handle_signals(int signum)
 {
 	if (signum == SIGINT)
 	{
+		g_exitstat = 1;
 		write(0, "\n", 1);
-		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
@@ -27,8 +29,8 @@ static	void	init_minishell(t_array *array, char **envp)
 
 	array->i = 0;
 	array->exit = 0;
+	array->filenumber = 0;
 	array->cd_count = 0;
-	array->exitstat = 0;
 	array->toggle_info = 0;
 	array->env.size = 0;
 	array->env.key = NULL;
@@ -92,5 +94,5 @@ void	minishell(char **envp)
 	}
 	free_minishell(&array);
 	system("leaks minishell");
-	exit(array.exitstat);
+	exit(g_exitstat);
 }

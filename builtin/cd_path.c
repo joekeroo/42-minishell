@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 15:31:32 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/22 14:06:56 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 13:23:31 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static	void	cd_env(t_array *array, char *dir)
 			closedir(directory);
 		}
 		else if (ENOENT == errno && ft_strlen(temp) > 0)
-			print_cd_err(array, temp, 1);
+			print_cd_err(temp, 1);
 		else if (ft_strlen(temp) > 0)
-			print_cd_err(array, temp, 2);
+			print_cd_err(temp, 2);
 	}
 	else
-		print_cd_err(array, dir, 3);
+		print_cd_err(dir, 3);
 	free(temp);
 }
 
@@ -63,9 +63,9 @@ static	void	cd_dir(t_array *array, int prc)
 		closedir(dir);
 	}
 	else if (ENOENT == errno)
-		print_cd_err(array, array->cmd_group[prc].args[0], 1);
+		print_cd_err(array->cmd_group[prc].args[0], 1);
 	else
-		print_cd_err(array, array->cmd_group[prc].args[0], 2);
+		print_cd_err(array->cmd_group[prc].args[0], 2);
 }
 
 static	void	run_cd(t_array *array, int prc)
