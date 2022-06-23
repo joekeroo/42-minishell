@@ -6,11 +6,25 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:34:15 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/21 13:45:03 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 15:34:26 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	close_dup(t_array *array, int prc)
+{
+	if (array->cmd_group[prc].files.in_status)
+	{
+		close(array->cmd_group[prc].files.infile);
+		close(array->cmd_group[prc].files.curr_stdin);
+	}
+	if (array->cmd_group[prc].files.out_status)
+	{
+		close(array->cmd_group[prc].files.outfile);
+		close(array->cmd_group[prc].files.curr_stdout);
+	}
+}
 
 void	check_dup(t_array *array, int prc)
 {

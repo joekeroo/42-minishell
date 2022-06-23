@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:24:13 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 15:32:13 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	run_pipex(t_array *array);
 void	fork_exec(t_array *array, int prc);
 void	extra_waitpid(t_array *array, int prc);
 void	print_cmd_error(char *cmd);
+void	close_dup(t_array *array, int prc);
 void	closefds(t_array *array, int *lastfd, int i, int size);
 
 #endif

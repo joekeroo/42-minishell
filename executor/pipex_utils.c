@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:47:58 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:17:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/23 15:33:39 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static	void	extra_midprc(t_array *array, int prc, int *lastfd)
 	close(*lastfd);
 	close(array->fd[1]);
 	close(array->fd[0]);
-	close(array->cmd_group[prc].files.infile);
+	close_dup(array, prc);
 	builtin(array, prc);
 }
 
@@ -105,7 +105,7 @@ static	void	endprocess(t_array *array, int i, int lastfd)
 			dup2(lastfd, 0);
 		change_in_out_fd(array, i, 2);
 		close(lastfd);
-		close(array->cmd_group[i].files.infile);
+		close_dup(array, i);
 		builtin(array, i);
 	}
 	exit(g_exitstat);
