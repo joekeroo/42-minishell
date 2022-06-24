@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:31 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:16:00 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/24 13:43:31 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 static	void	print_header(void)
 {
 	printf("\n\n");
-	printf(GRNA"█▀▄▀█ ▄█    ▄   ▄█    ▄▄▄▄▄    ▄  █ ▄███▄   █    █     \n");
-	printf(GRNB"█ █ █ ██     █  ██   █     ▀▄ █   █ █▀   ▀  █    █     \n");
-	printf(GRNC"█ ▄ █ ██ ██   █ ██ ▄  ▀▀▀▀▄   ██▀▀█ ██▄▄    █    █     \n");
-	printf(GRND"█   █ ▐█ █ █  █ ▐█  ▀▄▄▄▄▀    █   █ █▄   ▄▀ ███▄ ███▄  \n");
-	printf(GRNE"   █   ▐ █  █ █  ▐               █  ▀███▀       ▀    ▀ \n");
-	printf(GRNF"  ▀      █   ██                 ▀                      \n");
+	printf(GRNF"                                                        \n");
+	printf(GRNA" █▀▄▀█ ▄█    ▄   ▄█    ▄▄▄▄▄    ▄  █ ▄███▄   █    █     \n");
+	printf(GRNB" █ █ █ ██     █  ██   █     ▀▄ █   █ █▀   ▀  █    █     \n");
+	printf(GRNC" █ ▄ █ ██ ██   █ ██ ▄  ▀▀▀▀▄   ██▀▀█ ██▄▄    █    █     \n");
+	printf(GRND" █   █ ▐█ █ █  █ ▐█  ▀▄▄▄▄▀    █   █ █▄   ▄▀ ███▄ ███▄  \n");
+	printf(GRNE"    █   ▐ █  █ █  ▐               █  ▀███▀       ▀    ▀ \n");
+	printf(GRNF"   ▀      █   ██                 ▀                      \n");
+	printf(GRNF"                                                        \n");
+	printf(RED"                                 by jhii && jking-ye    \n");
 	printf(WHT"\n\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 17:59:41 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/24 13:44:39 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define GRND	"\x1B[38;5;35m"
 # define GRNE	"\x1B[38;5;36m"
 # define GRNF	"\x1B[38;5;36m"
+# define RED	"\x1B[35m"
 # define WHT	"\x1B[37m"
 
 # include <stdio.h>
