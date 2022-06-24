@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:02:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 14:06:46 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/24 15:07:47 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	fork_exec(t_array *array, int prc)
 		exit(g_exitstat);
 	}
 	waitpid(process, &status, 0);
+	signal(SIGINT, SIG_IGN);
 	g_exitstat = WEXITSTATUS(status);
 	dup2(outfd, 1);
 	close(outfd);

@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:47:58 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 15:33:39 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/24 15:07:56 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	run_pipex(t_array *array)
 			else
 				midprocess(array, i, lastfd);
 		}
+		signal(SIGINT, SIG_IGN);
 		closefds(array, &lastfd, i, array->n_cmdln);
 		extra_waitpid(array, i++);
 	}
