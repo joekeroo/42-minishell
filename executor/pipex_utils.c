@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:47:58 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/24 15:07:56 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/24 16:23:58 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	void	startprocess(t_array *array, int i)
 		close(array->fd[0]);
 		builtin(array, i);
 	}
-	exit(g_exitstat);
+	exit(127);
 }
 
 static	void	extra_midprc(t_array *array, int prc, int *lastfd)
@@ -81,7 +81,7 @@ static	void	midprocess(t_array *array, int i, int lastfd)
 	}
 	else
 		extra_midprc(array, i, &lastfd);
-	exit(g_exitstat);
+	exit(127);
 }
 
 static	void	endprocess(t_array *array, int i, int lastfd)
@@ -108,7 +108,7 @@ static	void	endprocess(t_array *array, int i, int lastfd)
 		close_dup(array, i);
 		builtin(array, i);
 	}
-	exit(g_exitstat);
+	exit(127);
 }
 
 void	run_pipex(t_array *array)
