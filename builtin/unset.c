@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:52:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:22:51 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 14:20:16 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,23 @@ static	void	check_exitstat(int check)
 		g_exitstat = 0;
 }
 
+static	int	check_syntax(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (ft_isdigit(str[i++]))
+		return (0);
+	while (str[i] && str[i] != '=')
+	{
+		if (ft_isalnum(str[i]))
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 static	void	error_check(t_array *array, int prc)
 {
 	int	i;
@@ -43,7 +60,7 @@ static	void	error_check(t_array *array, int prc)
 	check = 0;
 	while (i < array->cmd_group[prc].n_arg)
 	{
-		if (ft_isdigit(array->cmd_group[prc].args[i][0]) == 0)
+		if (check_syntax(array->cmd_group[prc].args[i]))
 		{
 			if (find_env(array, array->cmd_group[prc].args[i]))
 				remove_key_value(array, array->cmd_group[prc].args[i]);
