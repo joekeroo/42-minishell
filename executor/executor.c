@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:02:42 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/24 16:23:18 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 15:01:56 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static	int	run_exec(t_array *array, char **paths, char **args)
 	char	*new_path;
 
 	i = 0;
-	execve(args[0], args, array->en_var);
 	while (paths[i])
 	{
 		new_path = re_path(paths[i], args[0]);
@@ -37,6 +36,9 @@ static	void	executor(t_array *array, int prc)
 
 	if (!array->cmd_group[prc].cmd)
 		return ;
+	args = get_arguments(array, prc);
+	execve(array->cmd_group[prc].cmd, args, array->en_var);
+	free_array(args, array->cmd_group[prc].n_arg + 1);
 	paths = get_path(array, prc);
 	if (!paths)
 		return ;

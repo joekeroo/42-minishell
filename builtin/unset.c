@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:52:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/25 14:20:16 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 14:50:19 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static	int	check_syntax(char *str)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(str[i++]))
+	if (ft_isdigit(str[i]))
 		return (0);
-	while (str[i] && str[i] != '=')
+	while (str[i])
 	{
 		if (ft_isalnum(str[i]))
 			i++;
