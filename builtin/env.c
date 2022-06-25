@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:17 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 13:24:39 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 19:02:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,18 @@ static	void	print_msg(t_array *array, int j)
 
 static	void	print_error(t_array *array, int prc)
 {
+	char	*res;
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = ft_strjoin("env: ", array->cmd_group[prc].args[0]);
+	temp2 = ft_strdup(": No such file or directory\n");
+	res = ft_strjoin(temp1, temp2);
+	ft_putstr_fd(res, 2);
+	free(temp1);
+	free(temp2);
+	free(res);
 	g_exitstat = 127;
-	printf("env: %s: No such file or directory\n",
-		array->cmd_group[prc].args[0]);
 }
 
 static	int	check_path(t_array *array, int prc)

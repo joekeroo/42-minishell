@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:31:33 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/06 11:53:31 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 19:09:46 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static	int	checkfirstpipe(char *str)
 		i++;
 	if (str[i] == '|')
 	{
-		printf("Syntax Error\n");
+		printf("minishell: Syntax Error\n");
 		return (-1);
 	}
 	return (i);
@@ -72,7 +72,7 @@ static	int	get_token(t_array *array, char *str, int type)
 		check = checkcharacter(array, str, i, type);
 		if (check < 0)
 		{
-			printf("Syntax Error\n");
+			printf("minishell: Syntax Error\n");
 			status = -1;
 			break ;
 		}

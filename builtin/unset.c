@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 14:52:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/25 14:50:19 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 18:59:27 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	int	check_syntax(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (ft_isalnum(str[i]))
+		if (ft_isalnum(str[i]) || str[i] == '_')
 			i++;
 		else
 			return (0);
@@ -68,8 +68,7 @@ static	void	error_check(t_array *array, int prc)
 		else
 		{
 			check = 1;
-			printf("minishell: unset: `%s': not a valid identifier\n",
-				array->cmd_group[prc].args[i]);
+			print_unset_err(array->cmd_group[prc].args[i]);
 		}
 		i++;
 	}

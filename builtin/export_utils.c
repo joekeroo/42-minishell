@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 14:25:52 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/12 14:38:25 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 18:57:41 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,21 @@ static	char	*extr_env(char *str, int type)
 	else
 		temp = ft_substr(str, size + 1, i);
 	return (temp);
+}
+
+void	print_export_err(char *str)
+{
+	char	*res;
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = ft_strjoin("minishell: export: `", str);
+	temp2 = ft_strdup("': not a valid identifier\n");
+	res = ft_strjoin(temp1, temp2);
+	ft_putstr_fd(res, 2);
+	free(temp1);
+	free(temp2);
+	free(res);
 }
 
 void	add_env(t_array *array, char *str)

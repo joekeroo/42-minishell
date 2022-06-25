@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:14:54 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/08 16:11:25 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 18:59:12 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ static	char	**duplicate_array(char **array, int size)
 		i++;
 	}
 	return (temp);
+}
+
+void	print_unset_err(char *str)
+{
+	char	*res;
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = ft_strjoin("minishell: unset: `", str);
+	temp2 = ft_strdup("': not a valid identifier\n");
+	res = ft_strjoin(temp1, temp2);
+	ft_putstr_fd(res, 2);
+	free(temp1);
+	free(temp2);
+	free(res);
 }
 
 void	remove_key_value(t_array *array, char *key)

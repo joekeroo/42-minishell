@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/24 13:44:39 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 18:58:33 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ void	cd_path(t_array *array, int prc);
 void	print_cd_err(char *str, int type);
 void	save_file(t_array *array, int prc);
 void	print_pwd(t_array *array, int prc);
+void	print_unset_err(char *str);
+void	print_export_err(char *str);
 void	print_env(t_array *array, int prc);
 void	unset_env(t_array *array, int prc);
 void	export_env(t_array *array, int prc);

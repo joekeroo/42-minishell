@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:34:15 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/23 15:34:26 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/25 18:37:44 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,6 @@ void	builtin(t_array *array, int prc)
 	unset_env(array, prc);
 	if (array->cmd_group[prc].executed == 0)
 		fork_exec(array, prc);
+	if (array->n_cmdln > 1)
+		exit(g_exitstat);
 }
