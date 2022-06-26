@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 19:46:23 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/25 21:13:18 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/26 12:11:12 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,11 @@ static	int	get_heredoc_size(char *str)
 	return (size);
 }
 
-static	void	replace_heredoc(t_array *array, char *str)
+static	void	replace_heredoc(t_array *array, char *str, int size, int i)
 {
-	int	i;
 	int	j;
-	int	size;
 
-	i = 0;
 	j = 0;
-	size = get_heredoc_size(str);
 	array->temp = malloc(sizeof(char) * size + 1);
 	while (i < ft_strlen(str))
 	{
@@ -81,7 +77,12 @@ static	void	replace_heredoc(t_array *array, char *str)
 
 static	void	expand_heredoc(t_array *array, int prc, int i)
 {
-	replace_heredoc(array, array->cmd_group[prc].token[i]);
+	int	j;
+	int	size;
+
+	j = 0;
+	size = get_heredoc_size(array->cmd_group[prc].token[i]);
+	replace_heredoc(array, array->cmd_group[prc].token[i], size, j);
 	free(array->cmd_group[prc].token[i]);
 	array->cmd_group[prc].token[i] = ft_strdup(array->temp);
 	free(array->temp);

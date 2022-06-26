@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:47:58 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/25 21:12:30 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/26 12:17:08 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	run_pipex(t_array *array)
 {
 	int	i;
 	int	lastfd;
-	int	status;
 
 	i = 0;
 	lastfd = 0;
@@ -139,11 +138,4 @@ void	run_pipex(t_array *array)
 		closefds(array, &lastfd, i, array->n_cmdln);
 		extra_waitpid(array, i++);
 	}
-	i = 0;
-	while (i < array->n_cmdln)
-	{
-		waitpid(array->process[i], &status, 0);
-		i++;
-	}
-	g_exitstat = WEXITSTATUS(status);
 }
