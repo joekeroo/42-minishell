@@ -6,7 +6,7 @@
 /*   By: jhii <jhii@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:45:35 by jhii              #+#    #+#             */
-/*   Updated: 2022/06/25 18:58:33 by jhii             ###   ########.fr       */
+/*   Updated: 2022/06/26 11:43:56 by jhii             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void	print_redir(t_array *array, int i);
 int		checkfiles(t_array *array, int prc);
 int		redir_file(t_array *array, int prc);
 int		checkpwd(t_array *array, char *key);
+int		heredoc_size(t_array *array, int prc);
 int		exit_minishell(t_array *array, int prc);
 void	change_in_out_fd(t_array *array, int prc, int type);
 void	echo(t_array *array, int prc);
