@@ -53,5 +53,5 @@ cd minishell && make
 
 ### Contributors
 
-- [@jokeroo](https://github.com/joekeroo)
-- [@JordieYen](https://github.com/JordieYen)
+- [`jokeroo`](https://github.com/joekeroo)
+- [`JordieYen`](https://github.com/JordieYen)
