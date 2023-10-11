@@ -1,4 +1,4 @@
-#42-minishell
+# 42-minishell
 
 In this project, we will be creating a simple working version of bash. **No** thanks to this project, we'll be able to travel back in time and come back to problems people faced when `Windows` didn't exists.
 
@@ -13,7 +13,7 @@ In this project, we will be creating a simple working version of bash. **No** th
 | A working history |           saves all previous inputs given by the user           |
 |    Executables    | executes the right executables based on `PATH` using `execve()` |
 |     Built-ins     |              `echo, pwd, export, unset, env, exit`              |
-|   ENV Expansion   |                      `''` and `""` support                      |
+|   ENV Expansion   |                          `''` and `""`                          |
 |   Redirections    |                         `<, <<, >, >>`                          |
 |      Piping       |                              `\|`                               |
 |      Signals      |                    `ctrl+D, ctrl+C, ctrl+\`                     |
