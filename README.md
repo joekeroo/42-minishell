@@ -50,3 +50,8 @@ cd minishell && make
 ```bash
 ./minishell
 ```
+
+### Contributors
+
+- [@jokeroo](https://github.com/joekeroo)
+- [@JordieYen](https://github.com/JordieYen)
