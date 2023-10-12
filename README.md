@@ -2,6 +2,8 @@
 
 In this project, we will be creating a simple working version of bash. **No** thanks to this project, we'll be able to travel back in time and come back to problems people faced when `Windows` didn't exists.
 
+![minishell demo](https://github.com/joekeroo/42-minishell/assets/58316168/7cc0e735-7056-47c4-b8b5-44b94f6ca19b)
+
 ## About
 
 - The program will constantly read input from the user.
